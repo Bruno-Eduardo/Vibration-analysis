@@ -40,22 +40,17 @@ def getBatch(set2process, dictOfOutputs, size=-1, reset=False):
         return
     lastPrintedFlag = -1
 
-
     for i in range(size):
         try:
             pickledFile = open(dataSetRawPath + '\\scratch\\' + set2process[getBatch.lastProcessedFile], 'rb')
         except:
-            #all files were training
-            #retraining may overfit ?
             getBatch.lastProcessedFile = (getBatch.lastProcessedFile) % len(set2process)
             pickledFile = open(dataSetRawPath + '\\scratch\\' + set2process[getBatch.lastProcessedFile], 'rb')
-            #getBatch.aux = 1000
-
 
         D = (pickle.load(pickledFile))+80
 
         if DEBUG: print(set2process[getBatch.lastProcessedFile], end="")
-        plotD(D)                                                                   #----------------------------------- Remover para plotar as ffts
+        #plotD(D)                                                                   #----------------------------------- Remover para plotar as ffts
 
         D = np.resize(D, (D.shape[0],D.shape[1],1))
         D = D.astype(np.uint8)
@@ -85,6 +80,7 @@ def getBatch(set2process, dictOfOutputs, size=-1, reset=False):
     getBatch([], dictOfOutputs, reset=True)
     return (batchX[:,:,:,:], batchY)
 
+
 def prepareBatches(dictOfOutputs):
     scratchFilesList = []
 
@@ -112,7 +108,6 @@ def prepareBatches(dictOfOutputs):
         #                                            z is the amount of class N occurrences,
         outputs = list(dictOfOutputs.keys())
         founds = [sum(1 if y in x else 0 for x in avaliati) for y in outputs]
-
 
         shuffledNice = len(set(founds)) <= 1  # This expression returns true when all elements are the same
         shuffledNice = shuffledNice and len(founds) == len(outputs)  # This expression returns true when all outputs
@@ -145,14 +140,12 @@ def generateScratch(parser=csv2array, file=dataFileCSV, labelsCsv=labelFileCSV):
     outFiles = []
     for i in range(length):
         # get the spectrogram of the signal
-        #raise Exception('quem diria')
         D = librosa.amplitude_to_db(np.abs(librosa.stft(signal[i,:],hop_length=1)), ref=np.max)
-        #raise Exception(D.shape)
 
         outFiles.append(dataSetRawPath + '\\scratch\\' + 'impactos' + str(int(label[i])) + 'inN' + str(i) +'.txt')
 
         if DEBUG: print("Saving    at: " + outFiles[-1]);
-        pickle.dump(D,                open(outFiles[-1], 'wb'))
+        pickle.dump(D, open(outFiles[-1], 'wb'))
 
     with open(scratchFilesListRAW, 'w') as file:
         file.write("\n".join(outFiles))
@@ -242,6 +235,7 @@ def main(convProps, givenBatches=None, epochs=300, dictOfOutputs={}, batch_size=
         ret = None
 
     return ret
+
 
 if __name__ == '__main__':
     #Esse aqui parece bom
