@@ -4,7 +4,8 @@ import random
 import pickle
 
 import librosa.display
-import tensorflow.compat.v1 as tf
+#import tensorflow.compat.v1 as tf
+import tensorflow as tf
 from tensorflow import keras
 
 print('importing utils....')
