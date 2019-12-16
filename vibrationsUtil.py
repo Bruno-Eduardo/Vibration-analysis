@@ -96,6 +96,9 @@ def getBatch(set2process, dictOfOutputs, size=-1, reset=False):
 
 def prepareBatches(dictOfOutputs):
     scratchFilesList = []
+    training = []
+    crssvald = []
+    avaliati = []
 
     with open(scratchFilesListRAW, 'r', encoding="utf8") as file:
         for line in file:
@@ -106,33 +109,39 @@ def prepareBatches(dictOfOutputs):
             else:
                 raise Exception('scratchFilesListRAW may be corrupted. Check ' + scratchFilesListRAW)
 
-    shuffledNice = False
-    while not shuffledNice:
-        random.shuffle(scratchFilesList)
+    mappedSamples = {}
 
-        cut = int(len(scratchFilesList)*.8)
+    #proportion or numbers of training
+    cut = .8
+    #cut = int(22/3)
 
-        training = scratchFilesList[0:cut]
-        crssvald = scratchFilesList[int(len(scratchFilesList) * .6):int(len(scratchFilesList) * .8)]
-        avaliati = scratchFilesList[cut:]
+    def getOutput(sampleFile, dictOfOutputs=dictOfOutputs):
+        possibleOutput = [value for key, value in dictOfOutputs.items() if key in sampleFile]
+        if not possibleOutput: raise Exception(sampleFile + "not found in dict of Outputs")
+        return max(possibleOutput)
 
-        # Nexts lines creates a list [a,b,...,z] where a is the amount of class 0 occurrences,
-        #                                            * is the amount of class * occurrences,
-        #                                            z is the amount of class N occurrences,
-        outputs = list(dictOfOutputs.keys())
-        founds = [sum(1 if y in x else 0 for x in avaliati) for y in outputs]
+    for sampleFile in scratchFilesList:
+        try:
+            mappedSamples[getOutput(sampleFile)].append(sampleFile)
+        except:
+            mappedSamples[getOutput(sampleFile)] = [sampleFile]
 
-        shuffledNice = len(set(founds)) <= 1  # This expression returns true when all elements are the same
-        shuffledNice = shuffledNice and len(founds) == len(outputs)  # This expression returns true when all outputs
-        # have the same amount of samples
-        if shuffledNice:
-            trainingSet = getBatch(training, dictOfOutputs)
-            getBatch([], {},reset=True)
-            avaliatiSet = getBatch(avaliati, dictOfOutputs)
+    for key, value in mappedSamples.items():
+        l = mappedSamples[key]
+        random.shuffle(l)
 
-        else:
-            print('not ok, reshufle' + '-' * 40)
-            #TODO implemet a smart reshufle
+        if cut < 1: cut = int(len(l)*cut) # if cut represents a proportion, parse to absolute number
+
+        training.extend(l[0:cut])
+        #crssvald TODO implement cross validation cut
+        avaliati.extend(l[cut:])
+
+    random.shuffle(training)
+    random.shuffle(crssvald)
+    random.shuffle(avaliati)
+
+    trainingSet = getBatch(training, dictOfOutputs)
+    avaliatiSet = getBatch(avaliati, dictOfOutputs)
 
     return (trainingSet, avaliatiSet, avaliati)
 
