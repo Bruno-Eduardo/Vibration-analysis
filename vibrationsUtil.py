@@ -63,7 +63,7 @@ def getBatch(set2process, dictOfOutputs, size=-1, reset=False):
         D = (pickle.load(pickledFile))+80
 
         if DEBUG: print(set2process[getBatch.lastProcessedFile], end="")
-        #plotD(D)                                                                   #----------------------------------- Remover para plotar as ffts
+        #plotD(D)                                       #----------------------------------- Remover para plotar as ffts
 
         D = np.resize(D, (D.shape[0],D.shape[1],1))
         D = D.astype(np.uint8)
@@ -90,7 +90,7 @@ def getBatch(set2process, dictOfOutputs, size=-1, reset=False):
     batchY = np.stack(batchY, axis=0)
     print("stacking DONE!")
 
-    getBatch([], dictOfOutputs, reset=True)
+    getBatch([], dictOfOutputs, reset=True) #TODO check if still needed
     return (batchX[:,:,:,:], batchY)
 
 
@@ -155,6 +155,7 @@ def generateScratch(parser=csv2array, file=dataFileCSV, labelsCsv=labelFileCSV):
         # get the spectrogram of the signal
         D = librosa.amplitude_to_db(np.abs(librosa.stft(signal[i,:],hop_length=1)), ref=np.max)
 
+        #FIXME generate \scratch if not found
         outFiles.append(dataSetRawPath + '\\scratch\\' + 'impactos' + str(int(label[i])) + 'inN' + str(i) +'.txt')
 
         if DEBUG: print("Saving    at: " + outFiles[-1]);
@@ -188,9 +189,11 @@ def setLayersAndCompile(shape=0, outputs=0, convProps=None, givenLayers = None):
         raise Exception ("No convProps or givenLayers")
 
     model = keras.Sequential(layers)
-    model.compile(optimizer=keras.optimizers.Adam(learning_rate=0.001) , loss='categorical_crossentropy', metrics=['accuracy', 'categorical_accuracy'])
+    model.compile(optimizer=keras.optimizers.Adam(decay=1e-6, learning_rate=0.0005) , loss='categorical_crossentropy',
+                  metrics=['accuracy', 'categorical_accuracy'])
 
     return model
+
 
 def saveModel(epochs, convFilters, comments, convSizes,history, model, dropOut, Pooling):
 
