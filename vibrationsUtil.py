@@ -15,15 +15,27 @@ print('Done!')
 # Global vars
 dataSetRawPath = r"F:\BrunoDeepLearning\ICvibracoesMesa\leitura0710"
 dataSetRawPath = r"F:\BrunoDeepLearning\ICvibracoesMesa\vibracoesSimuladas"
+dataSetRawPath = r"F:\BrunoDeepLearning\ICvibracoesMesa\vibracoesSimuladasMuitoDiscreta"
 
 scratchFilesListRAW = r"F:\BrunoDeepLearning\ICvibracoesMesa\VibrationsScratchFiles.txt"
 scratchFilesListRAW = r"F:\BrunoDeepLearning\ICvibracoesMesa\SimulatedVibrationsScratchFiles.txt"
+scratchFilesListRAW = r"F:\BrunoDeepLearning\ICvibracoesMesa\SimulatedVibrationsTenCategoriesScratchFiles.txt"
 
 dataFileCSV = 'impactos.csv'
 labelFileCSV = 'labels.csv'
 
 distancesDict = {"impactos1":0, "impactos4":1, "impactos8":2}
 distancesDict = {"impactos1":0, "impactos2":1, "impactos3":2}
+distancesDict = {"impactos1":0,
+                 "impactos2":1,
+                 "impactos3":2,
+                 "impactos4":3,
+                 "impactos5":4,
+                 "impactos6":5,
+                 "impactos7":6,
+                 "impactos8":7,
+                 "impactos9":8,
+                 "impactos10":9}
 
 files = listdir(dataSetRawPath)
 DEBUG = False
