@@ -8,37 +8,14 @@ import librosa.display
 import tensorflow as tf
 from tensorflow import keras
 
-print('importing utils....')
+from loadDataSets import *
 from generalUtil import *
 print('Done!')
 
-# Global vars
-dataSetRawPath = r"F:\BrunoDeepLearning\ICvibracoesMesa\leitura0710"
-dataSetRawPath = r"F:\BrunoDeepLearning\ICvibracoesMesa\vibracoesSimuladas"
-dataSetRawPath = r"F:\BrunoDeepLearning\ICvibracoesMesa\vibracoesSimuladasMuitoDiscreta"
+amostra = leituraMesa
 
-scratchFilesListRAW = r"F:\BrunoDeepLearning\ICvibracoesMesa\VibrationsScratchFiles.txt"
-scratchFilesListRAW = r"F:\BrunoDeepLearning\ICvibracoesMesa\SimulatedVibrationsScratchFiles.txt"
-scratchFilesListRAW = r"F:\BrunoDeepLearning\ICvibracoesMesa\SimulatedVibrationsTenCategoriesScratchFiles.txt"
-
-dataFileCSV = 'impactos.csv'
-labelFileCSV = 'labels.csv'
-
-distancesDict = {"impactos1":0, "impactos4":1, "impactos8":2}
-distancesDict = {"impactos1":0, "impactos2":1, "impactos3":2}
-distancesDict = {"impactos1":0,
-                 "impactos2":1,
-                 "impactos3":2,
-                 "impactos4":3,
-                 "impactos5":4,
-                 "impactos6":5,
-                 "impactos7":6,
-                 "impactos8":7,
-                 "impactos9":8,
-                 "impactos10":9}
-
-files = listdir(dataSetRawPath)
-DEBUG = False
+files = listdir(amostra.dataSetRawPath)
+DEBUG = True
 
 
 def getBatch(set2process, dictOfOutputs, size=-1, reset=False):
@@ -55,10 +32,10 @@ def getBatch(set2process, dictOfOutputs, size=-1, reset=False):
 
     for i in range(size):
         try:
-            pickledFile = open(dataSetRawPath + '\\scratch\\' + set2process[getBatch.lastProcessedFile], 'rb')
+            pickledFile = open(amostra.dataSetRawPath + '\\scratch\\' + set2process[getBatch.lastProcessedFile], 'rb')
         except:
             getBatch.lastProcessedFile = (getBatch.lastProcessedFile) % len(set2process)
-            pickledFile = open(dataSetRawPath + '\\scratch\\' + set2process[getBatch.lastProcessedFile], 'rb')
+            pickledFile = open(amostra.dataSetRawPath + '\\scratch\\' + set2process[getBatch.lastProcessedFile], 'rb')
 
         D = (pickle.load(pickledFile))+80
 
@@ -100,14 +77,15 @@ def prepareBatches(dictOfOutputs):
     crssvald = []
     avaliati = []
 
-    with open(scratchFilesListRAW, 'r', encoding="utf8") as file:
+
+    with open(amostra.scratchFilesListRAW, 'r', encoding="utf8") as file:
         for line in file:
-            line = line.replace('\n', '\r').replace('\r', '').replace('/', '\\').replace(dataSetRawPath + "\\scratch\\",
-                                                                                         "")
+            line = line.replace('\n', '\r').replace('\r', '').replace('/', '\\') # TODO find a better parser
+            line = line.replace(amostra.dataSetRawPath + "\\scratch\\", "")
             if 'txt' in line:
                 scratchFilesList.append(line)
             else:
-                raise Exception('scratchFilesListRAW may be corrupted. Check ' + scratchFilesListRAW)
+                raise Exception('amostra.scratchFilesListRAW may be corrupted. Check ' + amostra.scratchFilesListRAW)
 
     mappedSamples = {}
 
@@ -148,12 +126,7 @@ def prepareBatches(dictOfOutputs):
 
 def generateScratch(parser=csv2array, file=dataFileCSV, labelsCsv=labelFileCSV):
 
-    #TODO implementar a verificacao dos csv parseados
-    # if False and (os.path.isfile(dataSetRawPath + '\\scratch\\' + file[0:-4] +'.txt')):
-    #     pickledFile = open(dataSetRawPath + '\\scratch\\' + file[0:-4] +'.txt', 'rb')
-    #     D = (pickle.load(pickledFile))#.reshape(1, -1) + 80
-
-    data = parser(dataSetRawPath+"\\"+file, dataSetRawPath+"\\"+labelsCsv)
+    data = parser(amostra.dataSetRawPath+"\\"+file, amostra.dataSetRawPath+"\\"+labelsCsv)
 
     signal = data[0]
     label = data[1]
@@ -161,16 +134,25 @@ def generateScratch(parser=csv2array, file=dataFileCSV, labelsCsv=labelFileCSV):
 
     outFiles = []
     for i in range(length):
-        # get the spectrogram of the signal
+        #create scratch directory if it does not exist
+        if not path.exists(amostra.dataSetRawPath + '\\scratch'):
+            os.mkdir(amostra.dataSetRawPath + '\\scratch')
+
+        outName = amostra.dataSetRawPath + '\\scratch\\' + 'impactos' + str(int(label[i])) + 'inN' + str(i) +'.txt' #TODO "in" represents inches, so it is not generic
+        outFiles.append(outName)
+
+        if path.exists(outName) and not forceNewPickle:
+            continue #already parsed and saved
+
+        # get the spectrogram of the signal and saves
         D = librosa.amplitude_to_db(np.abs(librosa.stft(signal[i,:],hop_length=1)), ref=np.max)
-
-        #FIXME generate \scratch if not found
-        outFiles.append(dataSetRawPath + '\\scratch\\' + 'impactos' + str(int(label[i])) + 'inN' + str(i) +'.txt')
-
-        if DEBUG: print("Saving    at: " + outFiles[-1]);
         pickle.dump(D, open(outFiles[-1], 'wb'))
 
-    with open(scratchFilesListRAW, 'w') as file:
+
+        if DEBUG: print("Saved at: " + outFiles[-1]);
+
+    #write all spectrograms paths at scratchFilesListRAW
+    with open(amostra.scratchFilesListRAW, 'w') as file:
         file.write("\n".join(outFiles))
 
 
