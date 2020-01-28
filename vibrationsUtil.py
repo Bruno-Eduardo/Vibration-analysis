@@ -10,8 +10,11 @@ import librosa.display
 import tensorflow as tf
 from tensorflow import keras
 
-from loadDataSets import *
-from generalUtil import *
+from loadDataSets import dataFileCSV, labelFileCSV, leituraMesa, simulado3out, simulado10out
+from generalUtil import np, csv2array, confusionMatrixPrint
+#from generalUtil import plotD, debug, quit
+
+
 print('Done!')
 
 sample = leituraMesa
