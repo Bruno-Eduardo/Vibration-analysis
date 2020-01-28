@@ -24,7 +24,7 @@ def getBatch(set2process, dictOfOutputs, size=-1, reset=False):
     if size == -1:
         size = len(set2process)
     try:
-        getBatch.lastProcessedFile
+        getBatch.lastProcessedFile #TODO remove this counter, it beceme unecessary since keras
     except:
         getBatch.lastProcessedFile = 0
     if reset:
@@ -158,34 +158,26 @@ def generateScratch(parser=csv2array, file=dataFileCSV, labelsCsv=labelFileCSV, 
         file.write("\n".join(outFiles))
 
 
-def setLayersAndCompile(shape=0, outputs=0, convProps=None, givenLayers = None):
+def setLayers(amostra, convProps):
+    # TODO: DEPRECATE THIS?
+
     layers = []
 
-    if convProps != None:
-        # TODO: DEPRECATE THIS?
-        # First layer needs input_shape
-        layers.append(keras.layers.Conv2D(convProps[0]['nFilters'], convProps[0]['convSize'], activation='relu', input_shape=shape))
-        if convProps[0]['Pooling'] != None: layers.append(keras.layers.MaxPooling2D(convProps[0]['Pooling'][0], convProps[0]['Pooling'][1]))
-        layers.append(keras.layers.Dropout(convProps[0]['dropOut'], seed=42))
+    # First layer needs input_shape
+    layers.append(keras.layers.Conv2D(convProps[0]['nFilters'], convProps[0]['convSize'], activation='relu', input_shape=amostra.shape))
+    if convProps[0]['Pooling'] != None: layers.append(keras.layers.MaxPooling2D(convProps[0]['Pooling'][0], convProps[0]['Pooling'][1]))
+    layers.append(keras.layers.Dropout(convProps[0]['dropOut'], seed=42))
 
-        for conv in convProps[1:]:
-            layers.append(keras.layers.Conv2D(conv['nFilters'], conv['convSize'], activation='relu'))
-            if conv['Pooling'] != None: layers.append(keras.layers.MaxPooling2D(conv['Pooling'][0], conv['Pooling'][1]))
-            layers.append(keras.layers.Dropout(conv['dropOut'], seed=42))
+    for conv in convProps[1:]:
+        layers.append(keras.layers.Conv2D(conv['nFilters'], conv['convSize'], activation='relu'))
+        if conv['Pooling'] != None: layers.append(keras.layers.MaxPooling2D(conv['Pooling'][0], conv['Pooling'][1]))
+        layers.append(keras.layers.Dropout(conv['dropOut'], seed=42))
 
-        layers.append(keras.layers.Flatten())
-        layers.append(keras.layers.Dense(128, activation='relu'))
-        layers.append(keras.layers.Dense(outputs, activation=tf.nn.softmax))
-    elif givenLayers != None:
-        layers = givenLayers
-    else:
-        raise Exception ("No convProps or givenLayers")
+    layers.append(keras.layers.Flatten())
+    layers.append(keras.layers.Dense(128, activation='relu'))
+    layers.append(keras.layers.Dense(amostra.outputs, activation=tf.nn.softmax))
 
-    model = keras.Sequential(layers)
-    model.compile(optimizer=keras.optimizers.Adam(decay=1e-6, learning_rate=0.0005) , loss='categorical_crossentropy',
-                  metrics=['accuracy', 'categorical_accuracy'])
-
-    return model
+    return layers
 
 
 def saveModel(epochs, convFilters, comments, convSizes,history, model, dropOut, Pooling):
@@ -209,8 +201,7 @@ def saveModel(epochs, convFilters, comments, convSizes,history, model, dropOut, 
     return str(history.history['val_acc'][-1] ) + modelName2save
 
 
-def main(convProps, givenBatches=None, epochs=300, dictOfOutputs={}, batch_size=32, modelVerbose=1, comments="", save=True, givenLayers=None):
-
+def main(convProps, givenBatches=None, epochs=300, dictOfOutputs={}, batch_size=32, modelVerbose=1, comments="", save=True, layers=None):
     # Generate batches if none given
     if givenBatches == None:
         generateScratch()
@@ -221,7 +212,14 @@ def main(convProps, givenBatches=None, epochs=300, dictOfOutputs={}, batch_size=
         avaliati = None
 
     # Generate keras model and compile
-    model = setLayersAndCompile(shape=trainingSet[0][0].shape, outputs=len(dictOfOutputs), convProps=convProps, givenLayers=givenLayers)
+    if layers == None:
+        layers = setLayers(amostra, convProps=convProps)
+
+    model = keras.Sequential(layers)
+    model.compile(optimizer=keras.optimizers.Adam(decay=1e-6,
+                                                  learning_rate=0.0005),
+                                                  loss='categorical_crossentropy',
+                                                  metrics=['accuracy', 'categorical_accuracy'])
 
     #fit keras model
     print("Fitting...")
