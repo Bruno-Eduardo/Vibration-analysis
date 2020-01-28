@@ -1,5 +1,7 @@
 
 from os import listdir
+import os.path
+from os import path
 import random
 import pickle
 
