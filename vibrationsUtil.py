@@ -14,9 +14,9 @@ from loadDataSets import *
 from generalUtil import *
 print('Done!')
 
-amostra = leituraMesa
+sample = leituraMesa
 
-files = listdir(amostra.dataSetRawPath)
+files = listdir(sample.dataSetRawPath)
 DEBUG = True
 
 
@@ -34,10 +34,10 @@ def getBatch(set2process, dictOfOutputs, size=-1, reset=False):
 
     for i in range(size):
         try:
-            pickledFile = open(amostra.dataSetRawPath + '\\scratch\\' + set2process[getBatch.lastProcessedFile], 'rb')
+            pickledFile = open(sample.dataSetRawPath + '\\scratch\\' + set2process[getBatch.lastProcessedFile], 'rb')
         except:
             getBatch.lastProcessedFile = (getBatch.lastProcessedFile) % len(set2process)
-            pickledFile = open(amostra.dataSetRawPath + '\\scratch\\' + set2process[getBatch.lastProcessedFile], 'rb')
+            pickledFile = open(sample.dataSetRawPath + '\\scratch\\' + set2process[getBatch.lastProcessedFile], 'rb')
 
         D = (pickle.load(pickledFile))+80
 
@@ -80,14 +80,14 @@ def prepareBatches(dictOfOutputs):
     avaliati = []
 
 
-    with open(amostra.scratchFilesListRAW, 'r', encoding="utf8") as file:
+    with open(sample.scratchFilesListRAW, 'r', encoding="utf8") as file:
         for line in file:
             line = line.replace('\n', '\r').replace('\r', '').replace('/', '\\') # TODO find a better parser
-            line = line.replace(amostra.dataSetRawPath + "\\scratch\\", "")
+            line = line.replace(sample.dataSetRawPath + "\\scratch\\", "")
             if 'txt' in line:
                 scratchFilesList.append(line)
             else:
-                raise Exception('amostra.scratchFilesListRAW may be corrupted. Check ' + amostra.scratchFilesListRAW)
+                raise Exception('amostra.scratchFilesListRAW may be corrupted. Check ' + sample.scratchFilesListRAW)
 
     mappedSamples = {}
 
@@ -128,7 +128,7 @@ def prepareBatches(dictOfOutputs):
 
 def generateScratch(parser=csv2array, file=dataFileCSV, labelsCsv=labelFileCSV, forceNewPickle=False):
 
-    data = parser(amostra.dataSetRawPath+"\\"+file, amostra.dataSetRawPath+"\\"+labelsCsv)
+    data = parser(sample.dataSetRawPath + "\\" + file, sample.dataSetRawPath + "\\" + labelsCsv)
 
     signal = data[0]
     label = data[1]
@@ -137,10 +137,10 @@ def generateScratch(parser=csv2array, file=dataFileCSV, labelsCsv=labelFileCSV, 
     outFiles = []
     for i in range(length):
         #create scratch directory if it does not exist
-        if not path.exists(amostra.dataSetRawPath + '\\scratch'):
-            os.mkdir(amostra.dataSetRawPath + '\\scratch')
+        if not path.exists(sample.dataSetRawPath + '\\scratch'):
+            os.mkdir(sample.dataSetRawPath + '\\scratch')
 
-        outName = amostra.dataSetRawPath + '\\scratch\\' + 'impactos' + str(int(label[i])) + 'inN' + str(i) +'.txt' #TODO "in" represents inches, so it is not generic
+        outName = sample.dataSetRawPath + '\\scratch\\' + 'impactos' + str(int(label[i])) + 'inN' + str(i) + '.txt' #TODO "in" represents inches, so it is not generic
         outFiles.append(outName)
 
         if path.exists(outName) and not forceNewPickle:
@@ -154,17 +154,17 @@ def generateScratch(parser=csv2array, file=dataFileCSV, labelsCsv=labelFileCSV, 
         if DEBUG: print("Saved at: " + outFiles[-1]);
 
     #write all spectrograms paths at scratchFilesListRAW
-    with open(amostra.scratchFilesListRAW, 'w') as file:
+    with open(sample.scratchFilesListRAW, 'w') as file:
         file.write("\n".join(outFiles))
 
 
-def setLayers(amostra, convProps):
+def setLayers(sample, convProps):
     # TODO: DEPRECATE THIS?
 
     layers = []
 
     # First layer needs input_shape
-    layers.append(keras.layers.Conv2D(convProps[0]['nFilters'], convProps[0]['convSize'], activation='relu', input_shape=amostra.shape))
+    layers.append(keras.layers.Conv2D(convProps[0]['nFilters'], convProps[0]['convSize'], activation='relu', input_shape=sample.shape))
     if convProps[0]['Pooling'] != None: layers.append(keras.layers.MaxPooling2D(convProps[0]['Pooling'][0], convProps[0]['Pooling'][1]))
     layers.append(keras.layers.Dropout(convProps[0]['dropOut'], seed=42))
 
@@ -175,7 +175,7 @@ def setLayers(amostra, convProps):
 
     layers.append(keras.layers.Flatten())
     layers.append(keras.layers.Dense(128, activation='relu'))
-    layers.append(keras.layers.Dense(amostra.NofOutputs, activation=tf.nn.softmax))
+    layers.append(keras.layers.Dense(sample.NofOutputs, activation=tf.nn.softmax))
 
     return layers
 
@@ -201,7 +201,7 @@ def saveModel(epochs, convFilters, comments, convSizes,history, model, dropOut, 
     return str(history.history['val_acc'][-1] ) + modelName2save
 
 
-def main(convProps, givenBatches=None, epochs=300, dictOfOutputs={}, batch_size=32, modelVerbose=1, comments="", save=True, layers=None):
+def main(givenBatches=None, epochs=300, dictOfOutputs={}, batch_size=32, modelVerbose=1, comments="", save=True, layers=None, convProps=None):
     # Generate batches if none given
     if givenBatches == None:
         generateScratch()
@@ -213,7 +213,7 @@ def main(convProps, givenBatches=None, epochs=300, dictOfOutputs={}, batch_size=
 
     # Generate keras model and compile
     if layers == None:
-        layers = setLayers(amostra, convProps=convProps)
+        layers = setLayers(sample, convProps=convProps)
 
     model = keras.Sequential(layers)
     model.compile(optimizer=keras.optimizers.Adam(decay=1e-6,
@@ -250,8 +250,8 @@ def main(convProps, givenBatches=None, epochs=300, dictOfOutputs={}, batch_size=
 
 
 if __name__ == '__main__':
-    layers = [keras.layers.MaxPooling2D(amostra.shape[0]//100, amostra.shape[1]//100,   #compress to aprox shape 100x100
-                                        input_shape=(amostra.shape+(1,None))[0:-1]),    #converts (shape) to (shape,1)
+    layers = [keras.layers.MaxPooling2D(sample.shape[0] // 100, sample.shape[1] // 100,  #compress to aprox shape 100x100
+                                        input_shape=(sample.shape + (1, None))[0:-1]),  #converts (shape) to (shape,1)
               keras.layers.BatchNormalization(),
               keras.layers.Conv2D(2, (3, 3), activation='relu'),
               keras.layers.MaxPooling2D(2, 2),
@@ -263,4 +263,4 @@ if __name__ == '__main__':
               keras.layers.MaxPooling2D(2, 2),
               keras.layers.Dropout(0.01),
               keras.layers.Flatten(),
-              keras.layers.Dense(amostra.NofOutputs, activation=tf.nn.softmax)]
+              keras.layers.Dense(sample.NofOutputs, activation=tf.nn.softmax)]
