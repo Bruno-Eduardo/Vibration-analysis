@@ -38,3 +38,8 @@ def confusionMatrixPrint(avaliatiSet, model):
     print(confusion_matrix(np.argmax(avaliatiSet[1], axis=1), model.predict_classes(avaliatiSet[0])))
     print("Labels: \t" + str(np.argmax(avaliatiSet[1], axis=1)))
     print("Predicted:\t" + str(model.predict_classes(avaliatiSet[0])))
+
+def quit():
+    import sys
+    print("QUIT called")
+    sys.exit()
