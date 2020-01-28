@@ -175,7 +175,7 @@ def setLayers(amostra, convProps):
 
     layers.append(keras.layers.Flatten())
     layers.append(keras.layers.Dense(128, activation='relu'))
-    layers.append(keras.layers.Dense(amostra.outputs, activation=tf.nn.softmax))
+    layers.append(keras.layers.Dense(amostra.NofOutputs, activation=tf.nn.softmax))
 
     return layers
 
@@ -250,8 +250,8 @@ def main(convProps, givenBatches=None, epochs=300, dictOfOutputs={}, batch_size=
 
 
 if __name__ == '__main__':
-
-    layers = [keras.layers.MaxPooling2D(10, 30, input_shape=(1025, 3075, 1)),
+    layers = [keras.layers.MaxPooling2D(amostra.shape[0]//100, amostra.shape[1]//100,   #compress to aprox shape 100x100
+                                        input_shape=(amostra.shape+(1,None))[0:-1]),    #converts (shape) to (shape,1)
               keras.layers.BatchNormalization(),
               keras.layers.Conv2D(2, (3, 3), activation='relu'),
               keras.layers.MaxPooling2D(2, 2),
@@ -263,6 +263,4 @@ if __name__ == '__main__':
               keras.layers.MaxPooling2D(2, 2),
               keras.layers.Dropout(0.01),
               keras.layers.Flatten(),
-              keras.layers.Dense(10, activation=tf.nn.softmax)]
-
-    main(convProps=None, dictOfOutputs=distancesDict, batch_size=16, givenLayers=layers, epochs=1000)
+              keras.layers.Dense(amostra.NofOutputs, activation=tf.nn.softmax)]
