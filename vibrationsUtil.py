@@ -126,7 +126,7 @@ def prepareBatches(dictOfOutputs):
     return (trainingSet, avaliatiSet, avaliati)
 
 
-def generateScratch(parser=csv2array, file=dataFileCSV, labelsCsv=labelFileCSV):
+def generateScratch(parser=csv2array, file=dataFileCSV, labelsCsv=labelFileCSV, forceNewPickle=False):
 
     data = parser(amostra.dataSetRawPath+"\\"+file, amostra.dataSetRawPath+"\\"+labelsCsv)
 
