@@ -57,7 +57,7 @@ def getBatch(set2process, dictOfOutputs, size=-1, reset=False):
         try:
             batchX.append(D)
             batchY.append(Y)
-        except:
+        except NameError:
             batchX = [D]
             batchY = [Y]
 
@@ -106,7 +106,7 @@ def prepareBatches(dictOfOutputs):
     for sampleFile in scratchFilesList:
         try:
             mappedSamples[getOutput(sampleFile)].append(sampleFile)
-        except:
+        except KeyError:
             mappedSamples[getOutput(sampleFile)] = [sampleFile]
 
     for key, value in mappedSamples.items():
@@ -204,7 +204,7 @@ def saveModel(epochs, convFilters, comments, convSizes,history, model, dropOut, 
     return str(history.history['val_acc'][-1] ) + modelName2save
 
 
-def main(givenBatches=None, epochs=300, dictOfOutputs={}, batch_size=32, modelVerbose=1, comments="", save=True, layers=None, convProps=None):
+def main(dictOfOutputs, givenBatches=None, epochs=300, batch_size=32, modelVerbose=1, comments="", save=True, layers=None, convProps=None):
     # Generate batches if none given
     if givenBatches == None:
         generateScratch()
@@ -212,7 +212,6 @@ def main(givenBatches=None, epochs=300, dictOfOutputs={}, batch_size=32, modelVe
     else:
         trainingSet = givenBatches[0]
         avaliatiSet = givenBatches[1]
-        avaliati = None
 
     # Generate keras model and compile
     if layers == None:
