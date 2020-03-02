@@ -1,2 +1,7 @@
 telegram.py
 __pycache__
+.cache/*
+output.txt
+outputError.txt
+temp.txt
+
