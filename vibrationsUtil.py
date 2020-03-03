@@ -50,7 +50,7 @@ def getBatch(set2process, dictOfOutputs, size=-1, reset=False):
         if DEBUG: print(set2process[getBatch.lastProcessedFile], end="")
         #plotD(D)                                       #----------------------------------- Remover para plotar as ffts
 
-        D = np.resize(D, (D.shape[0],D.shape[1],1))
+        D = np.resize(D, (D.shape[0],D.shape[1],1))     # making D a "channel last" tensor
         D = D.astype(np.uint8)
 
         Y = np.zeros(len(dictOfOutputs), dtype = int)
