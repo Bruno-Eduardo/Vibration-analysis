@@ -153,3 +153,49 @@ def legacy(): #used to be out of main
 
     telegram_bot_sendtext("shutting down!")
     #subprocess.call(["shutdown", "-f", "-s", "-t", "60"])
+
+
+
+    #----------------------------------------------------------------------------
+    #another legacy main:
+    def get_main_layers():
+        main_layers = [
+            keras.layers.MaxPooling2D(sample.shape[0] // 100, sample.shape[1] // 100,  # compress to aprox shape 100x100
+                                      input_shape=(sample.shape + (1, None))[0:-1]),  # converts (shape) to (shape,1)
+            keras.layers.BatchNormalization(),
+            keras.layers.Conv2D(32, (4, 4), activation='relu'),
+            keras.layers.Dropout(0.015),
+            keras.layers.Flatten(),
+            keras.layers.Dense(32, activation=tf.nn.softmax),
+            keras.layers.Dense(sample.NofOutputs, activation=tf.nn.softmax)]
+        return main_layers
+    main_layers = get_main_layers()
+    # 1a tnetativa 100% em categorico no conjunto da mesa em 200 epocas
+    # 2a tentantica 90% em 270 epocas, depois em 400 decaiu pra 80, mas loss ainda baixando
+    # tanto no training quanto no validation, porem baixando cada vez menos. Em 1000 epocas ainda 80
+    # 3a tentatica 400 epocas pra bater 80%. em 524 bateu 90%. Parou em 80%, mas loss continuou caindo
+    # 4a tentativa 123 epocas 90%. em 138 epocas o loss comecou a aumentar. em 172 voltou a diminuir.
+    # sempre ficoando em 90%
+    # Em todos os casos o loss de treinamento nao tendeu a zero, entao existe um underfitting
+    # porem a acuracia bateu 100 em todos os treinamentos
+
+    #main(dictOfOutputs=sample.distancesDict, batch_size=21, layers=main_layers, epochs=500 * 4)
+
+    #quit()
+
+    K = 10
+    val_cat = []
+
+    for _ in range(K):
+        main_layers = get_main_layers()
+        ret = main(dictOfOutputs=sample.distancesDict, batch_size=16, layers=goodLayers.get_a_layer(keras, sample), epochs=200)
+        Kbackend.clear_session()
+        tf.keras.backend.clear_session()
+        keras.backend.clear_session()
+        val_cat.append(ret[0].item()*100)
+
+
+    print(type(val_cat[0]))
+    print(val_cat)
+    print(statistics.mean(val_cat))
+    print(statistics.stdev(val_cat))
