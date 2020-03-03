@@ -39,7 +39,9 @@ def confusionMatrixPrint(avaliatiSet, model):
     print("Labels: \t" + str(np.argmax(avaliatiSet[1], axis=1)))
     print("Predicted:\t" + str(model.predict_classes(avaliatiSet[0])))
 
-def quit():
+def quit(reason=None):
     import sys
     print("QUIT called")
+    if reason:
+        print("Reason:", reason)
     sys.exit()
