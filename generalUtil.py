@@ -9,10 +9,16 @@ import librosa.display
 
 from sklearn.metrics import confusion_matrix
 
-def csv2array(csvDataFileName, csvLabelsFileName):
+
+def csv2array(csvDataFileName, csvLabelsFileName=None):
     data = np.loadtxt(csvDataFileName, delimiter=',')
-    labels = np.loadtxt(csvLabelsFileName, delimiter=',')
-    length = labels.shape[0]
+    if csvLabelsFileName is not None:
+        labels = np.loadtxt(csvLabelsFileName, delimiter=',')
+        length = labels.shape[0]
+
+        return data, labels, length
+    return data
+
 
     return (data, labels, length)
 
