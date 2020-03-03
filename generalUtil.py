@@ -20,7 +20,6 @@ def csv2array(csvDataFileName, csvLabelsFileName=None):
     return data
 
 
-    return (data, labels, length)
 
 def plotD(D):
     librosa.display.specshow(D, y_axis='linear', x_axis='time')
