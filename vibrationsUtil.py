@@ -39,7 +39,7 @@ def getBatch(set2process, dictOfOutputs, size=-1, reset=False):
         try:
             pickledFile = open(sample.dataSetRawPath + '\\scratch\\' + set2process[getBatch.lastProcessedFile], 'rb')
         except:
-            getBatch.lastProcessedFile = (getBatch.lastProcessedFile) % len(set2process)
+            getBatch.lastProcessedFile = getBatch.lastProcessedFile % len(set2process)
             pickledFile = open(sample.dataSetRawPath + '\\scratch\\' + set2process[getBatch.lastProcessedFile], 'rb')
 
         D = (pickle.load(pickledFile))+80
@@ -62,7 +62,7 @@ def getBatch(set2process, dictOfOutputs, size=-1, reset=False):
             batchY = [Y]
 
         printCandidate = int(10*getBatch.lastProcessedFile/size)
-        if(lastPrintedFlag != printCandidate):
+        if lastPrintedFlag != printCandidate:
             lastPrintedFlag = printCandidate
             if DEBUG: print(str(10*printCandidate) + "%")
         getBatch.lastProcessedFile += 1
@@ -73,7 +73,7 @@ def getBatch(set2process, dictOfOutputs, size=-1, reset=False):
     print("stacking DONE!")
 
     getBatch([], dictOfOutputs, reset=True) #TODO check if still needed
-    return (batchX[:,:,:,:], batchY)
+    return batchX[:, :, :, :], batchY
 
 
 def prepareBatches(dictOfOutputs):
@@ -126,7 +126,7 @@ def prepareBatches(dictOfOutputs):
     trainingSet = getBatch(training, dictOfOutputs)
     avaliatiSet = getBatch(avaliati, dictOfOutputs)
 
-    return (trainingSet, avaliatiSet, avaliati)
+    return trainingSet, avaliatiSet, avaliati
 
 
 def generateScratch(parser=csv2array, file=dataFileCSV, labelsCsv=labelFileCSV, forceNewPickle=False):
@@ -143,7 +143,8 @@ def generateScratch(parser=csv2array, file=dataFileCSV, labelsCsv=labelFileCSV, 
         if not path.exists(sample.dataSetRawPath + '\\scratch'):
             os.mkdir(sample.dataSetRawPath + '\\scratch')
 
-        outName = sample.dataSetRawPath + '\\scratch\\' + 'impactos' + str(int(label[i])) + 'inN' + str(i) + '.txt' #TODO "in" represents inches, so it is not generic
+        # TODO "in" represents inches, so it is not generic
+        outName = sample.dataSetRawPath + '\\scratch\\' + 'impactos' + str(int(label[i])) + 'inN' + str(i) + '.txt'
         outFiles.append(outName)
 
         if path.exists(outName) and not forceNewPickle:
@@ -163,17 +164,16 @@ def generateScratch(parser=csv2array, file=dataFileCSV, labelsCsv=labelFileCSV, 
 
 def setLayers(sample, convProps):
     # TODO: DEPRECATE THIS?
-
-    layers = []
-
     # First layer needs input_shape
+    layers = [keras.layers.Conv2D(convProps[0]['nFilters'], convProps[0]['convSize'], activation='relu',
+                                  input_shape=sample.shape)]
     layers.append(keras.layers.Conv2D(convProps[0]['nFilters'], convProps[0]['convSize'], activation='relu', input_shape=sample.shape))
-    if convProps[0]['Pooling'] != None: layers.append(keras.layers.MaxPooling2D(convProps[0]['Pooling'][0], convProps[0]['Pooling'][1]))
+    if convProps[0]['Pooling'] is not None: layers.append(keras.layers.MaxPooling2D(convProps[0]['Pooling'][0], convProps[0]['Pooling'][1]))
     layers.append(keras.layers.Dropout(convProps[0]['dropOut'], seed=42))
 
     for conv in convProps[1:]:
         layers.append(keras.layers.Conv2D(conv['nFilters'], conv['convSize'], activation='relu'))
-        if conv['Pooling'] != None: layers.append(keras.layers.MaxPooling2D(conv['Pooling'][0], conv['Pooling'][1]))
+        if conv['Pooling'] is not None: layers.append(keras.layers.MaxPooling2D(conv['Pooling'][0], conv['Pooling'][1]))
         layers.append(keras.layers.Dropout(conv['dropOut'], seed=42))
 
     layers.append(keras.layers.Flatten())
@@ -204,9 +204,10 @@ def saveModel(epochs, convFilters, comments, convSizes,history, model, dropOut, 
     return str(history.history['val_acc'][-1] ) + modelName2save
 
 
-def main(dictOfOutputs, givenBatches=None, epochs=300, batch_size=32, modelVerbose=1, comments="", save=True, layers=None, convProps=None):
+def main(dictOfOutputs, givenBatches=None, epochs=300, batch_size=32, modelVerbose=1, comments="", save=True,
+         layers=None, convProps=None):
     # Generate batches if none given
-    if givenBatches == None:
+    if givenBatches is None:
         generateScratch()
         (trainingSet, avaliatiSet, avaliati) = prepareBatches(dictOfOutputs)
     else:
@@ -214,7 +215,7 @@ def main(dictOfOutputs, givenBatches=None, epochs=300, batch_size=32, modelVerbo
         avaliatiSet = givenBatches[1]
 
     # Generate keras model and compile
-    if layers == None:
+    if layers is None:
         layers = setLayers(sample, convProps=convProps)
 
     model = keras.Sequential(layers)
