@@ -1,5 +1,20 @@
 
 
+def tryingToSimulatelayers(D, np):
+
+    D = np.resize(D,(1025, 3075))
+
+    def tryToSimulatePolling(Dsim):
+        import skimage.measure
+        Dsim = skimage.measure.block_reduce(Dsim, (1025 // 1025, 3075 // 100), np.median)
+        Dsim -= np.mean(Dsim)
+        Dsim = Dsim / np.var(Dsim)
+        Dsim = np.sqrt(Dsim)
+        print("Doing math", type(Dsim))
+        #plotD(Dsim)
+
+    tryToSimulatePolling(D)
+
 def mat2array(data):
     y = data['Time_Point1']['y_values'][0][0][0][0][0][0]
 
