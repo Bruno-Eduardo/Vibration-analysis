@@ -1,4 +1,3 @@
-
 from telegram import *
 
 import time
@@ -21,9 +20,11 @@ def plotD(D):
     librosa.display.specshow(D, y_axis='linear', x_axis='time')
     plt.colorbar(format='%+2.0f dB')
     plt.title('Linear-frequency power spectrogram')
-    plt.tight_layout();plt.show()
+    plt.tight_layout();
+    plt.show()
 
-def debug(arg, parameter=None, stop = False):
+
+def debug(arg, parameter=None, stop=False):
     print("type: " + str(type(arg)))
     print("value: " + str(arg))
     try:
@@ -31,13 +32,15 @@ def debug(arg, parameter=None, stop = False):
     except:
         pass
     if stop:
-        time.sleep(10**4)
+        time.sleep(10 ** 4)
+
 
 def confusionMatrixPrint(avaliatiSet, model):
     print("Confusion matrix")
     print(confusion_matrix(np.argmax(avaliatiSet[1], axis=1), model.predict_classes(avaliatiSet[0])))
     print("Labels: \t" + str(np.argmax(avaliatiSet[1], axis=1)))
     print("Predicted:\t" + str(model.predict_classes(avaliatiSet[0])))
+
 
 def quit(reason=None):
     import sys
