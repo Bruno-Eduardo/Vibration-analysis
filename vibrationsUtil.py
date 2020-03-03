@@ -4,16 +4,19 @@ import os.path
 from os import path
 import random
 import pickle
+import statistics
 
 import librosa.display
 #import tensorflow.compat.v1 as tf
 import tensorflow as tf
 from tensorflow import keras
+from tensorflow.keras import backend as Kbackend
 
 from loadDataSets import dataFileCSV, labelFileCSV, leituraMesa, simulado3out, simulado10out
 from generalUtil import np, csv2array, confusionMatrixPrint
 #from generalUtil import plotD, debug, quit
 
+import goodLayers
 
 print('Done!')
 
@@ -248,22 +251,20 @@ def main(dictOfOutputs, givenBatches=None, epochs=300, batch_size=32, modelVerbo
 
 
 
-
-
-
-
 if __name__ == '__main__':
-    layers = [keras.layers.MaxPooling2D(sample.shape[0] // 100, sample.shape[1] // 100,  #compress to aprox shape 100x100
-                                        input_shape=(sample.shape + (1, None))[0:-1]),  #converts (shape) to (shape,1)
-              keras.layers.BatchNormalization(),
-              keras.layers.Conv2D(2, (3, 3), activation='relu'),
-              keras.layers.MaxPooling2D(2, 2),
-              keras.layers.Dropout(0.015),
-              keras.layers.Conv2D(2, (3, 3), activation='relu'),
-              keras.layers.MaxPooling2D(2, 2),
-              keras.layers.Dropout(0.015),
-              keras.layers.Conv2D(2, (3, 3), activation='relu'),
-              keras.layers.MaxPooling2D(2, 2),
-              keras.layers.Dropout(0.01),
-              keras.layers.Flatten(),
-              keras.layers.Dense(sample.NofOutputs, activation=tf.nn.softmax)]
+
+    K = 10
+    val_cat = []
+
+    for _ in range(K):
+        ret = main(dictOfOutputs=sample.distancesDict, batch_size=16, layers=goodLayers.get_a_layer(keras, sample), epochs=200)
+        Kbackend.clear_session()
+        tf.keras.backend.clear_session()
+        keras.backend.clear_session()
+        val_cat.append(ret[0].item()*100)
+
+
+    print(type(val_cat[0]))
+    print(val_cat)
+    print(statistics.mean(val_cat))
+    print(statistics.stdev(val_cat))
