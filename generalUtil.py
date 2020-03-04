@@ -23,9 +23,10 @@ def csv2array(csvDataFileName, csvLabelsFileName=None):
 
 
 def csv2array3D(classes=["a"], dimensions=("x", "y", "z"), path="./"):
-    labels = []
     length = 0
-    empty_list = [[] for dim in dimensions]
+    labels = []
+    ready_data = []
+    empty_list = [[] for _ in dimensions]
     dimensions_with_list = zip(dimensions, empty_list)
 
     files = os.listdir(path)
@@ -45,13 +46,11 @@ def csv2array3D(classes=["a"], dimensions=("x", "y", "z"), path="./"):
             mapped_files[file_class][exec_number] = [data]
 
         if len(mapped_files[file_class][exec_number]) == len(dimensions):
-            SOME_DATA_STRUCT += np.stack(mapped_files[file_class][exec_number], axis=2)
+            ready_data.append(np.stack(mapped_files[file_class][exec_number], axis=1))
             labels.append(int(exec_number))
             length += 1
 
-    data = parse(SOME_DATA_STRUCT)
-
-    return data, labels, length
+    return np.stack(ready_data, axis=0), labels, length
 
 
 def plotD(D):
