@@ -38,7 +38,7 @@ def csv2array3D(classes=["a"], dimensions=("x", "y", "z"), path="./"):
 
     for file in files:
         file_class, exec_number = re.split(r"(\d+)",file)[0:2]
-        data = csv2array(file)
+        data = csv2array(file_with_path)[:,1] # read csv and get just the data, ignore time
 
         try:
             mapped_files[file_class][exec_number].append(data)
