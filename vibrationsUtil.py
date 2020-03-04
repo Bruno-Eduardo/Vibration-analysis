@@ -12,7 +12,7 @@ import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import backend as Kbackend
 
-from loadDataSets import dataFileCSV, labelFileCSV, leituraMesa, simulado3out, simulado10out
+from loadDataSets import leituraMesa, simulado3out, simulado10out, leitura1902
 from generalUtil import np, csv2array, confusionMatrixPrint
 #from generalUtil import plotD, debug, quit
 
@@ -132,7 +132,7 @@ def prepareBatches(dictOfOutputs):
     return trainingSet, avaliatiSet, avaliati
 
 
-def generateScratch(parser=csv2array, file=dataFileCSV, labelsCsv=labelFileCSV, forceNewPickle=False):
+def generateScratch(parser=csv2array, file='impactos.csv', labelsCsv='labels.csv', forceNewPickle=False):
 
     data = parser(sample.dataSetRawPath + "\\" + file, sample.dataSetRawPath + "\\" + labelsCsv)
 

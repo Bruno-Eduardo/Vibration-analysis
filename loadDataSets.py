@@ -4,27 +4,28 @@ import librosa
 
 from generalUtil import csv2array
 
-dataFileCSV = 'impactos.csv'
-labelFileCSV = 'labels.csv'
-
 class Dataset():
     def __init__(   self,
                     dataSetRawPath,
                     scratchFilesListRAW,
                     distancesDict,
+                    dataFileCSV = None,
+                    labelFileCSV = None,
                     shapeIsRevelevant = True):
         self.dataSetRawPath         = dataSetRawPath
         self.scratchFilesListRAW    = scratchFilesListRAW
         self.distancesDict          = distancesDict
         self.NofOutputs             = len(self.distancesDict)
         self.parser                 = csv2array
+        self.dataFileCSV            = dataFileCSV
+        self.labelFileCSV           = labelFileCSV
         self.shape                  = self.getShapeFromFirstSample(shapeIsRevelevant)
 
     def getShapeFromFirstSample(self, shapeIsRevelevant):
         if not shapeIsRevelevant:
             return None
 
-        data = self.parser(self.dataSetRawPath + "\\" + dataFileCSV, self.dataSetRawPath + "\\" + labelFileCSV)
+        data = self.parser(self.dataSetRawPath + "\\" + self.dataFileCSV, self.dataSetRawPath + "\\" + self.labelFileCSV)
         signal = data[0]
         return librosa.amplitude_to_db(np.abs(librosa.stft(signal[0,:],hop_length=1)), ref=np.max).shape
 
@@ -34,11 +35,15 @@ class Dataset():
 leituraMesa     = Dataset(r"F:\BrunoDeepLearning\ICvibracoesMesa\leitura0710",
                           r"F:\BrunoDeepLearning\ICvibracoesMesa\VibrationsScratchFiles.txt",
                           {"impactos1":0, "impactos4":1, "impactos8":2},
+                          dataFileCSV = 'impactos.csv',
+                          labelFileCSV = 'labels.csv',
                           shapeIsRevelevant=True)
 
 simulado3out    = Dataset(r"F:\BrunoDeepLearning\ICvibracoesMesa\vibracoesSimuladas",
                           r"F:\BrunoDeepLearning\ICvibracoesMesa\SimulatedVibrationsScratchFiles.txt",
-                          {"impactos1":0, "impactos2":1, "impactos3":2})
+                          {"impactos1":0, "impactos2":1, "impactos3":2},
+                          dataFileCSV = 'impactos.csv',
+                          labelFileCSV = 'labels.csv')
 
 simulado10out   = Dataset(r"F:\BrunoDeepLearning\ICvibracoesMesa\vibracoesSimuladasMuitoDiscreta",
                           r"F:\BrunoDeepLearning\ICvibracoesMesa\SimulatedVibrationsTenCategoriesScratchFiles.txt",
@@ -51,7 +56,10 @@ simulado10out   = Dataset(r"F:\BrunoDeepLearning\ICvibracoesMesa\vibracoesSimula
                            "impactos7": 6,
                            "impactos8": 7,
                            "impactos9": 8,
-                           "impactos10": 9})
+                           "impactos10": 9},
+                          dataFileCSV = 'impactos.csv',
+                          labelFileCSV = 'labels.csv')
+
 
 if __name__ == '__main__':
     print(leituraMesa)
