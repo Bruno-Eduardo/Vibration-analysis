@@ -30,13 +30,17 @@ def csv2array3D(classes=["a"], dimensions=("x", "y", "z"), path="./"):
     dimensions_with_list = zip(dimensions, empty_list)
 
     files = os.listdir(path)
+    files_with_path = [os.path.join(path, file) for file in files]
     mapped_files = {}
 
     # create data structure
     for class_ in classes:
         mapped_files[class_] = {k: v for k, v in dimensions_with_list}
 
-    for file in files:
+    for file, file_with_path in zip(files, files_with_path):
+        if not file.endswith('.csv'):
+            continue
+
         file_class, exec_number = re.split(r"(\d+)",file)[0:2]
         data = csv2array(file_with_path)[:,1] # read csv and get just the data, ignore time
 
