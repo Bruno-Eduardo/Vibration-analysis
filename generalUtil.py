@@ -36,8 +36,7 @@ def csv2array3D(classes=["a"], dimensions=("x", "y", "z"), path="./"):
         mapped_files[class_] = {k: v for k, v in dimensions_with_list}
 
     for file in files:
-        file_class = re.match(r".*(?=\d+)", file).group(0)  # regex to find class #FIXME crashes with 2 digts value
-        exec_number = re.search(r"\d+", "abc28x.txt").group(0)  # regex to find which execution
+        file_class, exec_number = re.split(r"(\d+)",file)[0:2]
         data = csv2array(file)
 
         try:
