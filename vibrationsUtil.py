@@ -20,7 +20,7 @@ import goodLayers
 
 print('Done!')
 
-sample = leituraMesa
+sample = leitura1902
 
 files = listdir(sample.dataSetRawPath)
 DEBUG = True
