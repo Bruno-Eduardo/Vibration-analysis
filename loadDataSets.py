@@ -26,7 +26,8 @@ class Dataset():
             return None
 
         data = self.parser(self.dataSetRawPath + "\\" + self.dataFileCSV, self.dataSetRawPath + "\\" + self.labelFileCSV)
-        signal = data[0]
+        signal = data[0]    # TODO this method runs the whole list of files to get just the first data. \
+                            #   Needs a better implementation
         return librosa.amplitude_to_db(np.abs(librosa.stft(signal[0,:],hop_length=1)), ref=np.max).shape
 
     def __str__(self):
