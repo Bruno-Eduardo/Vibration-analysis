@@ -19,16 +19,27 @@ class Dataset():
         self.parser                 = csv2array
         self.dataFileCSV            = dataFileCSV
         self.labelFileCSV           = labelFileCSV
+        self.spacer                 = 'inN'
         self.shape                  = self.getShapeFromFirstSample(shapeIsRevelevant)
+        self.mainName               = 'impactos'
 
     def getShapeFromFirstSample(self, shapeIsRevelevant):
-        if not shapeIsRevelevant:
+        if not shapeIsRevelevant or self.labelFileCSV is None:
             return None
 
         data = self.parser(self.dataSetRawPath + "\\" + self.dataFileCSV, self.dataSetRawPath + "\\" + self.labelFileCSV)
         signal = data[0]    # TODO this method runs the whole list of files to get just the first data. \
                             #   Needs a better implementation
         return librosa.amplitude_to_db(np.abs(librosa.stft(signal[0,:],hop_length=1)), ref=np.max).shape
+
+    def parse(self, file, labelsCsv):
+        return self.parser(self.dataSetRawPath + "\\" + file, self.dataSetRawPath + "\\" + labelsCsv)
+
+    def get_out_name(self, class_, iteration, main_name=None, spacer=None, extension='.txt'):
+        main_name = self.mainName if main_name is None else main_name
+        spacer = self.spacer if spacer is None else spacer
+
+        return self.dataSetRawPath + '\\scratch\\' + main_name + class_ + spacer + str(iteration) + extension
 
     def __str__(self):
         return str(self.__dict__)

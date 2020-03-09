@@ -19,7 +19,7 @@ import goodLayers
 
 print('Done!')
 
-sample = leitura1902
+sample = simulado10out
 
 files = listdir(sample.dataSetRawPath)
 DEBUG = True
@@ -131,13 +131,13 @@ def prepareBatches(dictOfOutputs):
     return trainingSet, avaliatiSet, avaliati
 
 
-def generateScratch(parser=csv2array, file='impactos.csv', labelsCsv='labels.csv', forceNewPickle=False):
+def make_spectrogram(signal, out_name, hop_length=1, ref=np.max):
+    D = librosa.amplitude_to_db(np.abs(librosa.stft(signal, hop_length=hop_length)), ref=ref)
+    pickle.dump(D, open(out_name, 'wb'))
 
-    data = parser(sample.dataSetRawPath + "\\" + file, sample.dataSetRawPath + "\\" + labelsCsv)
 
-    signal = data[0]
-    label = data[1]
-    length = data[2]
+def generateScratch(parser=csv2array, file=sample.dataFileCSV, labelsCsv=sample.labelFileCSV, forceNewPickle=False):
+    signal, label, length = sample.parse(file, labelsCsv)
 
     out_files = []
     for i in range(length):
@@ -145,17 +145,15 @@ def generateScratch(parser=csv2array, file='impactos.csv', labelsCsv='labels.csv
         if not path.exists(sample.dataSetRawPath + '\\scratch'):
             os.mkdir(sample.dataSetRawPath + '\\scratch')
 
-        # TODO "in" represents inches, so it is not generic
-        outName = sample.dataSetRawPath + '\\scratch\\' + 'impactos' + str(int(label[i])) + 'inN' + str(i) + '.txt'
-        outFiles.append(outName)
+        out_name = sample.get_out_name(str(int(label[i])), i)
+        out_files.append(out_name)
 
-        if path.exists(outName) and not forceNewPickle:
-            continue #already parsed and saved
+        if path.exists(out_name) and not forceNewPickle:
+            continue  # already parsed and saved
 
         # get the spectrogram of the signal and saves
-        D = librosa.amplitude_to_db(np.abs(librosa.stft(signal[i,:],hop_length=1)), ref=np.max)
-        pickle.dump(D, open(outFiles[-1], 'wb'))
-
+        make_spectrogram(signal[i, :], out_name)
+        if DEBUG: print("Saved at: " + out_name);
 
     # write all spectrograms paths at scratchFilesListRAW
     with open(sample.scratchFilesListRAW, 'w') as file:
