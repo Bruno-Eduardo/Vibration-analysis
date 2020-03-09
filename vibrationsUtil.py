@@ -162,32 +162,10 @@ def generateScratch(parser=csv2array, file='impactos.csv', labelsCsv='labels.csv
 
     #write all spectrograms paths at scratchFilesListRAW
     with open(sample.scratchFilesListRAW, 'w') as file:
-        file.write("\n".join(outFiles))
+        file.write("\n".join(out_files))
 
 
-def setLayers(sample, convProps):
-    # TODO: DEPRECATE THIS?
-    # First layer needs input_shape
-    layers = [keras.layers.Conv2D(convProps[0]['nFilters'], convProps[0]['convSize'], activation='relu',
-                                  input_shape=sample.shape)]
-    layers.append(keras.layers.Conv2D(convProps[0]['nFilters'], convProps[0]['convSize'], activation='relu', input_shape=sample.shape))
-    if convProps[0]['Pooling'] is not None: layers.append(keras.layers.MaxPooling2D(convProps[0]['Pooling'][0], convProps[0]['Pooling'][1]))
-    layers.append(keras.layers.Dropout(convProps[0]['dropOut'], seed=42))
-
-    for conv in convProps[1:]:
-        layers.append(keras.layers.Conv2D(conv['nFilters'], conv['convSize'], activation='relu'))
-        if conv['Pooling'] is not None: layers.append(keras.layers.MaxPooling2D(conv['Pooling'][0], conv['Pooling'][1]))
-        layers.append(keras.layers.Dropout(conv['dropOut'], seed=42))
-
-    layers.append(keras.layers.Flatten())
-    layers.append(keras.layers.Dense(128, activation='relu'))
-    layers.append(keras.layers.Dense(sample.NofOutputs, activation=tf.nn.softmax))
-
-    return layers
-
-
-def saveModel(epochs, convFilters, comments, convSizes,history, model, dropOut, Pooling):
-
+def saveModel(epochs, convFilters, comments, convSizes, history, model, dropOut, Pooling):
     print("Saving at Results.txt...")
     modelName2save = 'savedModel' + 'Epoch' + str(epochs) + \
                      'filters' + str(convFilters) + \
@@ -218,26 +196,23 @@ def main(dictOfOutputs, givenBatches=None, epochs=300, batch_size=32, modelVerbo
         avaliatiSet = givenBatches[1]
 
     # Generate keras model and compile
-    if layers is None:
-        layers = setLayers(sample, convProps=convProps)
-
     model = keras.Sequential(layers)
     model.compile(optimizer=keras.optimizers.Adam(decay=1e-6,
                                                   learning_rate=0.0005),
                                                   loss='categorical_crossentropy',
                                                   metrics=['accuracy', 'categorical_accuracy'])
 
-    #fit keras model
+    # fit keras model
     print("Fitting...")
     history = model.fit(trainingSet[0], trainingSet[1],
                         epochs=epochs, validation_data=avaliatiSet,
                         batch_size=batch_size, verbose=modelVerbose)
 
-    #print confusion matrix
+    # print confusion matrix
     confusionMatrixPrint(avaliatiSet, model)
 
-    #save keras model
-    #TODO implement save without convProps
+    # save keras model
+    # TODO implement save without convProps
     if save and convProps:
         ret = saveModel(epochs,   convFilters=[d['nFilters'] for d in convProps],
                         convSizes  =[d['convSize'] for d in convProps],

@@ -1,5 +1,27 @@
 
 
+def setLayers(sample, convProps):
+    # TODO: DEPRECATE THIS?
+    # First layer needs input_shape
+    layers = [keras.layers.Conv2D(convProps[0]['nFilters'], convProps[0]['convSize'], activation='relu',
+                                  input_shape=sample.shape)]
+    layers.append(keras.layers.Conv2D(convProps[0]['nFilters'], convProps[0]['convSize'], activation='relu', input_shape=sample.shape))
+    if convProps[0]['Pooling'] is not None: layers.append(keras.layers.MaxPooling2D(convProps[0]['Pooling'][0], convProps[0]['Pooling'][1]))
+    layers.append(keras.layers.Dropout(convProps[0]['dropOut'], seed=42))
+
+    for conv in convProps[1:]:
+        layers.append(keras.layers.Conv2D(conv['nFilters'], conv['convSize'], activation='relu'))
+        if conv['Pooling'] is not None: layers.append(keras.layers.MaxPooling2D(conv['Pooling'][0], conv['Pooling'][1]))
+        layers.append(keras.layers.Dropout(conv['dropOut'], seed=42))
+
+    layers.append(keras.layers.Flatten())
+    layers.append(keras.layers.Dense(128, activation='relu'))
+    layers.append(keras.layers.Dense(sample.NofOutputs, activation=tf.nn.softmax))
+
+    return layers
+
+
+
 def tryingToSimulatelayers(D, np):
 
     D = np.resize(D,(1025, 3075))
