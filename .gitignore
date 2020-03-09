@@ -4,4 +4,6 @@ __pycache__
 output.txt
 outputError.txt
 temp.txt
+.idea/
+*.bak
 
