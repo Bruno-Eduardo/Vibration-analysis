@@ -12,7 +12,7 @@ from tensorflow import keras
 from tensorflow.keras import backend as Kbackend
 
 from loadDataSets import leituraMesa, simulado3out, simulado10out, leitura1902
-from generalUtil import np, csv2array, confusionMatrixPrint
+from generalUtil import np, csv2array, confusionMatrixPrint, make_spectrogram_and_pickle
 # from generalUtil import plotD, debug, quit
 
 import goodLayers
@@ -49,7 +49,7 @@ def getBatch(set2process, dictOfOutputs, size=-1, reset=False):
         if DEBUG: print(set2process[getBatch.lastProcessedFile], end="")
         # plotD(D)                                       #----------------------------------- Remover para plotar as ffts
 
-        D = np.resize(D, (D.shape[0], D.shape[1], 1))  # making D a "channel last" tensor
+        D = np.resize(D, (D.shape[0], D.shape[1], sample.channels))  # making D a "channel last" tensor
         D = D.astype(np.uint8)
 
         Y = np.zeros(len(dictOfOutputs), dtype=int)
@@ -129,11 +129,6 @@ def prepareBatches(dictOfOutputs):
     avaliatiSet = getBatch(avaliati, dictOfOutputs)
 
     return trainingSet, avaliatiSet, avaliati
-
-
-def make_spectrogram_and_pickle(signal, out_name, hop_length=1, ref=np.max):
-    D = librosa.amplitude_to_db(np.abs(librosa.stft(signal, hop_length=hop_length)), ref=ref)
-    pickle.dump(D, open(out_name, 'wb'))
 
 
 def generateScratch(sample, forceNewPickle=False):

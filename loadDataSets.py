@@ -1,8 +1,9 @@
 
+import os
 import numpy as np
 import librosa
 
-from generalUtil import csv2array, csv2array3D
+from generalUtil import csv2array, csv2array3D, make_spectrogram
 
 class Dataset():
     def __init__(   self,
@@ -22,6 +23,7 @@ class Dataset():
         self.spacer                 = 'inN'
         self.shape                  = self.getShapeFromFirstSample(shapeIsRevelevant)
         self.mainName               = 'impactos'
+        self.channels               = 1
 
     def getShapeFromFirstSample(self, shapeIsRevelevant):
         if not shapeIsRevelevant or self.labelFileCSV is None:

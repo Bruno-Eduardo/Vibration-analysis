@@ -8,8 +8,19 @@ import re
 import matplotlib.pyplot as plt
 import librosa
 import librosa.display
+import pickle
 
 from sklearn.metrics import confusion_matrix
+
+
+def make_spectrogram(signal, hop_length=1, ref=np.max):
+    D = librosa.amplitude_to_db(np.abs(librosa.stft(signal, hop_length=hop_length)), ref=ref)
+    return D
+
+
+def make_spectrogram_and_pickle(signal, out_name, hop_length=1, ref=np.max):
+    D = make_spectrogram(signal, hop_length=hop_length, ref=ref)
+    pickle.dump(D, open(out_name, 'wb'))
 
 
 def csv2array(csvDataFileName, csvLabelsFileName=None):
