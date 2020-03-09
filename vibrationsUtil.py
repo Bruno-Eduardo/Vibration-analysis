@@ -131,7 +131,7 @@ def prepareBatches(dictOfOutputs):
     return trainingSet, avaliatiSet, avaliati
 
 
-def make_spectrogram(signal, out_name, hop_length=1, ref=np.max):
+def make_spectrogram_and_pickle(signal, out_name, hop_length=1, ref=np.max):
     D = librosa.amplitude_to_db(np.abs(librosa.stft(signal, hop_length=hop_length)), ref=ref)
     pickle.dump(D, open(out_name, 'wb'))
 
@@ -153,7 +153,7 @@ def generateScratch(sample, forceNewPickle=False):
             continue  # already parsed and saved
 
         # get the spectrogram of the signal and saves
-        make_spectrogram(signal[i, :], out_name)
+        make_spectrogram_and_pickle(signal[i, :], out_name)
         if DEBUG: print("Saved at: " + out_name);
 
     # write all spectrograms paths at scratchFilesListRAW
