@@ -56,13 +56,24 @@ class DatasetNdimentional(Dataset):
                                                   {},
                                                   **kwargs)
         self.parser = csv2array3D
+        self.channels = '?TODO'
 
     def parse(self):
         return self.parser(classes=self.classes,
                            dimensions=self.dimensions,
                            path=self.path)
 
+    def get_first_sample(self):
+        all_files = os.listdir(self.dataSetRawPath)
+        for file in all_files:
+            if '.csv' in file:
+                return file
 
+    def getShapeFromFirstSample(self, shapeIsRevelevant):
+        first_sample = self.get_first_sample()
+        first_data = csv2array(os.path.join(self.dataSetRawPath, first_sample))[:,1]
+        signal = make_spectrogram(first_data)
+        return signal.shape
 
 leituraMesa     = Dataset(r"F:\BrunoDeepLearning\ICvibracoesMesa\leitura0710",
                           r"F:\BrunoDeepLearning\ICvibracoesMesa\VibrationsScratchFiles.txt",
