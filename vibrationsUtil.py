@@ -1,4 +1,3 @@
-
 from os import listdir
 import os.path
 from os import path
@@ -7,14 +6,14 @@ import pickle
 import statistics
 
 import librosa.display
-#import tensorflow.compat.v1 as tf
+# import tensorflow.compat.v1 as tf
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import backend as Kbackend
 
 from loadDataSets import leituraMesa, simulado3out, simulado10out, leitura1902
 from generalUtil import np, csv2array, confusionMatrixPrint
-#from generalUtil import plotD, debug, quit
+# from generalUtil import plotD, debug, quit
 
 import goodLayers
 
@@ -30,7 +29,7 @@ def getBatch(set2process, dictOfOutputs, size=-1, reset=False):
     if size == -1:
         size = len(set2process)
     try:
-        getBatch.lastProcessedFile #TODO remove this counter, it beceme unecessary since keras
+        getBatch.lastProcessedFile  # TODO remove this counter, it beceme unecessary since keras
     except:
         getBatch.lastProcessedFile = 0
     if reset:
@@ -45,16 +44,16 @@ def getBatch(set2process, dictOfOutputs, size=-1, reset=False):
             getBatch.lastProcessedFile = getBatch.lastProcessedFile % len(set2process)
             pickledFile = open(sample.dataSetRawPath + '\\scratch\\' + set2process[getBatch.lastProcessedFile], 'rb')
 
-        D = (pickle.load(pickledFile))+80
+        D = (pickle.load(pickledFile)) + 80
 
         if DEBUG: print(set2process[getBatch.lastProcessedFile], end="")
-        #plotD(D)                                       #----------------------------------- Remover para plotar as ffts
+        # plotD(D)                                       #----------------------------------- Remover para plotar as ffts
 
-        D = np.resize(D, (D.shape[0],D.shape[1],1))     # making D a "channel last" tensor
+        D = np.resize(D, (D.shape[0], D.shape[1], 1))  # making D a "channel last" tensor
         D = D.astype(np.uint8)
 
-        Y = np.zeros(len(dictOfOutputs), dtype = int)
-        Y[dictOfOutputs[set2process[getBatch.lastProcessedFile].split('in',1)[0]]] = 1
+        Y = np.zeros(len(dictOfOutputs), dtype=int)
+        Y[dictOfOutputs[set2process[getBatch.lastProcessedFile].split('in', 1)[0]]] = 1
         if DEBUG: print(", label:" + str(Y))
 
         try:
@@ -64,18 +63,18 @@ def getBatch(set2process, dictOfOutputs, size=-1, reset=False):
             batchX = [D]
             batchY = [Y]
 
-        printCandidate = int(10*getBatch.lastProcessedFile/size)
+        printCandidate = int(10 * getBatch.lastProcessedFile / size)
         if lastPrintedFlag != printCandidate:
             lastPrintedFlag = printCandidate
-            if DEBUG: print(str(10*printCandidate) + "%")
+            if DEBUG: print(str(10 * printCandidate) + "%")
         getBatch.lastProcessedFile += 1
 
     print("stacking...")
-    batchX = np.stack(batchX,axis=0)
+    batchX = np.stack(batchX, axis=0)
     batchY = np.stack(batchY, axis=0)
     print("stacking DONE!")
 
-    getBatch([], dictOfOutputs, reset=True) #TODO check if still needed
+    getBatch([], dictOfOutputs, reset=True)  # TODO check if still needed
     return batchX[:, :, :, :], batchY
 
 
@@ -85,10 +84,9 @@ def prepareBatches(dictOfOutputs):
     crssvald = []
     avaliati = []
 
-
     with open(sample.scratchFilesListRAW, 'r', encoding="utf8") as file:
         for line in file:
-            line = line.replace('\n', '\r').replace('\r', '').replace('/', '\\') # TODO find a better parser
+            line = line.replace('\n', '\r').replace('\r', '').replace('/', '\\')  # TODO find a better parser
             line = line.replace(sample.dataSetRawPath + "\\scratch\\", "")
             if 'txt' in line:
                 scratchFilesList.append(line)
@@ -97,9 +95,10 @@ def prepareBatches(dictOfOutputs):
 
     mappedSamples = {}
 
-    #proportion or numbers of training
+    # proportion or numbers of training
     cut = .8
-    #cut = int(22/3)
+
+    # cut = int(22/3)
 
     def getOutput(sampleFile, dictOfOutputs=dictOfOutputs):
         possibleOutput = [value for key, value in dictOfOutputs.items() if key in sampleFile]
@@ -116,10 +115,10 @@ def prepareBatches(dictOfOutputs):
         l = mappedSamples[key]
         random.shuffle(l)
 
-        if cut < 1: cut = int(len(l)*cut) # if cut represents a proportion, parse to absolute number
+        if cut < 1: cut = int(len(l) * cut)  # if cut represents a proportion, parse to absolute number
 
         training.extend(l[0:cut])
-        #crssvald TODO implement cross validation cut
+        # crssvald TODO implement cross validation cut
         avaliati.extend(l[cut:])
 
     random.shuffle(training)
@@ -140,9 +139,9 @@ def generateScratch(parser=csv2array, file='impactos.csv', labelsCsv='labels.csv
     label = data[1]
     length = data[2]
 
-    outFiles = []
+    out_files = []
     for i in range(length):
-        #create scratch directory if it does not exist
+        # create scratch directory if it does not exist
         if not path.exists(sample.dataSetRawPath + '\\scratch'):
             os.mkdir(sample.dataSetRawPath + '\\scratch')
 
@@ -158,9 +157,7 @@ def generateScratch(parser=csv2array, file='impactos.csv', labelsCsv='labels.csv
         pickle.dump(D, open(outFiles[-1], 'wb'))
 
 
-        if DEBUG: print("Saved at: " + outFiles[-1]);
-
-    #write all spectrograms paths at scratchFilesListRAW
+    # write all spectrograms paths at scratchFilesListRAW
     with open(sample.scratchFilesListRAW, 'w') as file:
         file.write("\n".join(out_files))
 
@@ -182,7 +179,7 @@ def saveModel(epochs, convFilters, comments, convSizes, history, model, dropOut,
     print("Saving Model...")
     model.save(modelName2save)
 
-    return str(history.history['val_acc'][-1] ) + modelName2save
+    return str(history.history['val_acc'][-1]) + modelName2save
 
 
 def main(dictOfOutputs, givenBatches=None, epochs=300, batch_size=32, modelVerbose=1, comments="", save=True,
@@ -199,8 +196,8 @@ def main(dictOfOutputs, givenBatches=None, epochs=300, batch_size=32, modelVerbo
     model = keras.Sequential(layers)
     model.compile(optimizer=keras.optimizers.Adam(decay=1e-6,
                                                   learning_rate=0.0005),
-                                                  loss='categorical_crossentropy',
-                                                  metrics=['accuracy', 'categorical_accuracy'])
+                  loss='categorical_crossentropy',
+                  metrics=['accuracy', 'categorical_accuracy'])
 
     # fit keras model
     print("Fitting...")
@@ -214,16 +211,15 @@ def main(dictOfOutputs, givenBatches=None, epochs=300, batch_size=32, modelVerbo
     # save keras model
     # TODO implement save without convProps
     if save and convProps:
-        ret = saveModel(epochs,   convFilters=[d['nFilters'] for d in convProps],
-                        convSizes  =[d['convSize'] for d in convProps],
-                        dropOut  =[d['dropOut'] for d in convProps],
-                        Pooling  =[d['Pooling'] for d in convProps],
-                        comments="vibracoesMesa"+comments, history=history, model=model)
+        ret = saveModel(epochs, convFilters=[d['nFilters'] for d in convProps],
+                        convSizes=[d['convSize'] for d in convProps],
+                        dropOut=[d['dropOut'] for d in convProps],
+                        Pooling=[d['Pooling'] for d in convProps],
+                        comments="vibracoesMesa" + comments, history=history, model=model)
     else:
         ret = (history.history['val_acc'][-1], history)
 
     return ret
-
 
 
 if __name__ == '__main__':
@@ -232,12 +228,12 @@ if __name__ == '__main__':
     val_cat = []
 
     for _ in range(K):
-        ret = main(dictOfOutputs=sample.distancesDict, batch_size=16, layers=goodLayers.get_a_layer(keras, sample), epochs=200)
+        ret = main(dictOfOutputs=sample.distancesDict, batch_size=16, layers=goodLayers.get_a_layer(keras, sample),
+                   epochs=200)
         Kbackend.clear_session()
         tf.keras.backend.clear_session()
         keras.backend.clear_session()
-        val_cat.append(ret[0].item()*100)
-
+        val_cat.append(ret[0].item() * 100)
 
     print(type(val_cat[0]))
     print(val_cat)
