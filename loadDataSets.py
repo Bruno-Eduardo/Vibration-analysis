@@ -2,7 +2,7 @@
 import numpy as np
 import librosa
 
-from generalUtil import csv2array
+from generalUtil import csv2array, csv2array3D
 
 class Dataset():
     def __init__(   self,
@@ -33,6 +33,21 @@ class Dataset():
     def __str__(self):
         return str(self.__dict__)
 
+class DatasetNdimentional(Dataset):
+    def __init__(self, path, **kwargs):
+        super(DatasetNdimentional, self).__init__(path,
+                                                  None,
+                                                  {},
+                                                  **kwargs)
+        self.parser = csv2array3D
+
+    def parse(self):
+        return self.parser(classes=self.classes,
+                           dimensions=self.dimensions,
+                           path=self.path)
+
+
+
 leituraMesa     = Dataset(r"F:\BrunoDeepLearning\ICvibracoesMesa\leitura0710",
                           r"F:\BrunoDeepLearning\ICvibracoesMesa\VibrationsScratchFiles.txt",
                           {"impactos1":0, "impactos4":1, "impactos8":2},
@@ -61,6 +76,7 @@ simulado10out   = Dataset(r"F:\BrunoDeepLearning\ICvibracoesMesa\vibracoesSimula
                           dataFileCSV = 'impactos.csv',
                           labelFileCSV = 'labels.csv')
 
+leitura1902     = DatasetNdimentional(r"F:\BrunoDeepLearning\ICvibracoesMesa\amostras1902\parsed")
 
 if __name__ == '__main__':
     print(leituraMesa)
