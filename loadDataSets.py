@@ -32,8 +32,11 @@ class Dataset():
                             #   Needs a better implementation
         return librosa.amplitude_to_db(np.abs(librosa.stft(signal[0,:],hop_length=1)), ref=np.max).shape
 
-    def parse(self, file, labelsCsv):
-        return self.parser(self.dataSetRawPath + "\\" + file, self.dataSetRawPath + "\\" + labelsCsv)
+    def parse(self, file=None, labels_csv=None):
+        file = self.dataFileCSV if file is None else file
+        labels_csv = self.labelFileCSV if labels_csv is None else labels_csv
+
+        return self.parser(self.dataSetRawPath + "\\" + file, self.dataSetRawPath + "\\" + labels_csv)
 
     def get_out_name(self, class_, iteration, main_name=None, spacer=None, extension='.txt'):
         main_name = self.mainName if main_name is None else main_name

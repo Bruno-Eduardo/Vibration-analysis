@@ -136,8 +136,9 @@ def make_spectrogram(signal, out_name, hop_length=1, ref=np.max):
     pickle.dump(D, open(out_name, 'wb'))
 
 
-def generateScratch(parser=csv2array, file=sample.dataFileCSV, labelsCsv=sample.labelFileCSV, forceNewPickle=False):
-    signal, label, length = sample.parse(file, labelsCsv)
+def generateScratch(sample, forceNewPickle=False):
+
+    signal, label, length = sample.parse()
 
     out_files = []
     for i in range(length):
@@ -184,7 +185,7 @@ def main(dictOfOutputs, givenBatches=None, epochs=300, batch_size=32, modelVerbo
          layers=None, convProps=None):
     # Generate batches if none given
     if givenBatches is None:
-        generateScratch()
+        generateScratch(sample)
         (trainingSet, avaliatiSet, avaliati) = prepareBatches(dictOfOutputs)
     else:
         trainingSet = givenBatches[0]
