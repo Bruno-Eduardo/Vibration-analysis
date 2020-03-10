@@ -13,14 +13,25 @@ import pickle
 from sklearn.metrics import confusion_matrix
 
 
-def make_spectrogram(signal, hop_length=1, ref=np.max):
-    D = librosa.amplitude_to_db(np.abs(librosa.stft(signal, hop_length=hop_length)), ref=ref)
-    return D
-
-
 def make_spectrogram_and_pickle(signal, out_name, hop_length=1, ref=np.max):
     D = make_spectrogram(signal, hop_length=hop_length, ref=ref)
     pickle.dump(D, open(out_name, 'wb'))
+
+
+def make_spectrogram(signal, hop_length=1, ref=np.max):
+    try:
+        dimensions = signal.shape[1]
+        stacked_data = []
+
+        for dim in range(dimensions):
+             stacked_data.append(make_spectrogram(signal[:,dim], hop_length, ref))
+
+        return np.stack(stacked_data)
+    except IndexError:
+        # Data is unidimensional so just make the spectrogram
+        D = librosa.amplitude_to_db(np.abs(librosa.stft(signal, hop_length=hop_length)), ref=ref)
+        print('making histogram')
+        return D
 
 
 def csv2array(csvDataFileName, csvLabelsFileName=None):
