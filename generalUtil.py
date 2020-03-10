@@ -44,6 +44,11 @@ def csv2array(csvDataFileName, csvLabelsFileName=None):
     return data
 
 
+def get_meta_info_from_file_name(file_name):
+    splited = re.split(r"(\d+|\.)", file_name)
+    return splited[0:3]
+
+
 def csv2array3D(classes=["a"], dimensions=("x", "y", "z"), path="./"):
     length = 0
     labels = []
@@ -63,7 +68,7 @@ def csv2array3D(classes=["a"], dimensions=("x", "y", "z"), path="./"):
         if not file.endswith('.csv'):
             continue
 
-        file_class, exec_number = re.split(r"(\d+)",file)[0:2]
+        file_class, exec_number, dim = get_meta_info_from_file_name(file) # TODO use dimensions axis
         data = csv2array(file_with_path)[:,1] # read csv and get just the data, ignore time
 
         try:
