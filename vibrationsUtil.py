@@ -133,7 +133,8 @@ def prepareBatches(dictOfOutputs):
 
 def generateScratch(sample, forceNewPickle=False):
 
-    signal, label, length = sample.parse()
+    print('generating scratch')
+    signal, label, length = sample.parse() # FIXME spending too much time even when do not need to parse
 
     out_files = []
     for i in range(length):

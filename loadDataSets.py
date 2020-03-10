@@ -72,7 +72,7 @@ class DatasetNdimentional(Dataset):
 
         return classes, dimensions
 
-    def parse(self, **kargs):    #TODO seems implemented at generalUtil
+    def parse(self, **kargs):
         return self.parser(classes=self.classes,
                            dimensions=self.dimensions,
                            path=self.dataSetRawPath)
