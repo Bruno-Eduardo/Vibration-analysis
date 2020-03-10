@@ -56,12 +56,26 @@ class DatasetNdimentional(Dataset):
                                                   {},
                                                   **kwargs)
         self.parser = csv2array3D
-        self.channels = '?TODO'
+        self.classes, self.dimensions = self.get_meta_info()
+        self.channels = len(self.dimensions)
 
-    def parse(self):
+    def get_meta_info(self):
+        classes = set()
+        dimensions = set()
+
+        all_files = os.listdir(self.dataSetRawPath)
+        for file in all_files:
+            if '.csv' in file:
+                class_, exec_number, dimension = get_meta_info_from_file_name(file)
+                classes.add(class_)
+                dimensions.add(dimension)
+
+        return classes, dimensions
+
+    def parse(self, **kargs):    #TODO seems implemented at generalUtil
         return self.parser(classes=self.classes,
                            dimensions=self.dimensions,
-                           path=self.path)
+                           path=self.dataSetRawPath)
 
     def get_first_sample(self):
         all_files = os.listdir(self.dataSetRawPath)
