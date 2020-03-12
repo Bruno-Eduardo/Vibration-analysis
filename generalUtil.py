@@ -49,24 +49,23 @@ def get_meta_info_from_file_name(file_name):
     return splited[0:3]
 
 
-def csv2array3D(classes=["a"], dimensions=("x", "y", "z"), path="./"):
+def csv2array3D(files_list, classes=["a"], dimensions=("x", "y", "z"), path="./"):
     length = 0
     labels = []
     ready_data = []
     empty_list = [[] for _ in dimensions]
     dimensions_with_list = zip(dimensions, empty_list)
 
-    files = os.listdir(path)
-    files_with_path = [os.path.join(path, file) for file in files]
+    files_with_path = [os.path.join(path, file) for file in files_list]
     mapped_files = {}
 
     # create data structure
     for class_ in classes:
         mapped_files[class_] = {k: v for k, v in dimensions_with_list}
 
-    for file, file_with_path in zip(files, files_with_path):
-        if not file.endswith('.csv'):
-            continue
+    i=0
+    for file, file_with_path in zip(files_list, files_with_path):
+        print(100 * i/len(files_list)); i += 1
 
         file_class, exec_number, dim = get_meta_info_from_file_name(file) # TODO use dimensions axis
         data = csv2array(file_with_path)[:,1] # read csv and get just the data, ignore time
@@ -78,10 +77,8 @@ def csv2array3D(classes=["a"], dimensions=("x", "y", "z"), path="./"):
 
         if len(mapped_files[file_class][exec_number]) == len(dimensions):
             ready_data.append(np.stack(mapped_files[file_class][exec_number], axis=1))
-            labels.append(int(exec_number))
-            length += 1
 
-    return np.stack(ready_data, axis=0), labels, length
+    return np.stack(ready_data, axis=0)
 
 
 def plotD(D):

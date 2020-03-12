@@ -21,9 +21,11 @@ class Dataset():
         self.dataFileCSV            = dataFileCSV
         self.labelFileCSV           = labelFileCSV
         self.spacer                 = 'inN'
-        self.shape                  = self.getShapeFromFirstSample(shapeIsRevelevant)
+        self.csv_file_list          = list(filter(lambda x: x.endswith('.csv'), os.listdir(self.dataSetRawPath)))
+        self.length                 = len(self.csv_file_list)
         self.mainName               = 'impactos'
         self.channels               = 1
+        self.shape                  = self.getShapeFromFirstSample(shapeIsRevelevant)
 
     def getShapeFromFirstSample(self, shapeIsRevelevant):
         if not shapeIsRevelevant or self.labelFileCSV is None:
@@ -52,9 +54,10 @@ class Dataset():
 class DatasetNdimentional(Dataset):
     def __init__(self, path, **kwargs):
         super(DatasetNdimentional, self).__init__(path,
-                                                  None,
+                                                  os.path.join(path, 'scratchFiles.txt'),
                                                   {},
                                                   **kwargs)
+        print(self.channels)
         self.parser = csv2array3D
         self.classes, self.dimensions = self.get_meta_info()
         self.channels = len(self.dimensions)
@@ -63,31 +66,35 @@ class DatasetNdimentional(Dataset):
         classes = set()
         dimensions = set()
 
-        all_files = os.listdir(self.dataSetRawPath)
-        for file in all_files:
-            if '.csv' in file:
-                class_, exec_number, dimension = get_meta_info_from_file_name(file)
-                classes.add(class_)
-                dimensions.add(dimension)
+        for file in self.csv_file_list:
+            class_, exec_number, dimension = get_meta_info_from_file_name(file)
+            classes.add(class_)
+            dimensions.add(dimension)
 
         return classes, dimensions
 
     def parse(self, **kargs):
-        return self.parser(classes=self.classes,
+        return self.parser(self.csv_file_list,
+                           classes=self.classes,
                            dimensions=self.dimensions,
                            path=self.dataSetRawPath)
 
     def get_first_sample(self):
-        all_files = os.listdir(self.dataSetRawPath)
-        for file in all_files:
-            if '.csv' in file:
-                return file
+        return self.csv_file_list[0]
 
     def getShapeFromFirstSample(self, shapeIsRevelevant):
         first_sample = self.get_first_sample()
-        first_data = csv2array(os.path.join(self.dataSetRawPath, first_sample))[:,1]
+        first_data = csv2array(os.path.join(self.dataSetRawPath, first_sample))[:,-1]
         signal = make_spectrogram(first_data)
         return signal.shape
+
+    def get_label_list(self):
+        list_of_labels = []
+        for file in self.csv_file_list:
+            _, label, _ = get_meta_info_from_file_name(file)
+            list_of_labels.append(label)
+        return list_of_labels
+
 
 leituraMesa     = Dataset(r"F:\BrunoDeepLearning\ICvibracoesMesa\leitura0710",
                           r"F:\BrunoDeepLearning\ICvibracoesMesa\VibrationsScratchFiles.txt",

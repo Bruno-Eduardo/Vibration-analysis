@@ -1,6 +1,7 @@
 from os import listdir
 import os.path
 from os import path
+import os
 import random
 import pickle
 import statistics
@@ -11,7 +12,7 @@ import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import backend as Kbackend
 
-from loadDataSets import leituraMesa, simulado3out, simulado10out, leitura1902
+from loadDataSets import leituraMesa, simulado3out, simulado10out, leitura1902, DatasetNdimentional
 from generalUtil import np, csv2array, confusionMatrixPrint, make_spectrogram_and_pickle
 # from generalUtil import plotD, debug, quit
 
@@ -19,9 +20,8 @@ import goodLayers
 
 print('Done!')
 
-sample = simulado10out
+sample = leitura1902
 
-files = listdir(sample.dataSetRawPath)
 DEBUG = True
 
 
@@ -36,6 +36,9 @@ def getBatch(set2process, dictOfOutputs, size=-1, reset=False):
         getBatch.lastProcessedFile = 0
         return
     lastPrintedFlag = -1
+
+    batchX = []
+    batchY = []
 
     for i in range(size):
         try:
@@ -56,12 +59,8 @@ def getBatch(set2process, dictOfOutputs, size=-1, reset=False):
         Y[dictOfOutputs[set2process[getBatch.lastProcessedFile].split('in', 1)[0]]] = 1
         if DEBUG: print(", label:" + str(Y))
 
-        try:
-            batchX.append(D)
-            batchY.append(Y)
-        except NameError:
-            batchX = [D]
-            batchY = [Y]
+        batchX.append(D)
+        batchY.append(Y)
 
         printCandidate = int(10 * getBatch.lastProcessedFile / size)
         if lastPrintedFlag != printCandidate:
@@ -134,27 +133,35 @@ def prepareBatches(dictOfOutputs):
 def generateScratch(sample, forceNewPickle=False):
 
     print('generating scratch')
-    signal, label, length = sample.parse() # FIXME spending too much time even when do not need to parse
+    if isinstance(sample, DatasetNdimentional):
+        labels = sample.get_label_list()
+        length = sample.length
+        signal = sample.parse()
+    else:
+        signal,labels,length = sample.parse()
 
     out_files = []
-    for i in range(length):
-        # create scratch directory if it does not exist
-        if not path.exists(sample.dataSetRawPath + '\\scratch'):
-            os.mkdir(sample.dataSetRawPath + '\\scratch')
 
-        out_name = sample.get_out_name(str(int(label[i])), i)
+    # create scratch directory if it does not exist
+    if not path.exists(sample.dataSetRawPath + '\\scratch'):
+        os.mkdir(sample.dataSetRawPath + '\\scratch')
+
+    for i in range(length):
+        out_name = sample.get_out_name(str(int(labels[i])), i)
         out_files.append(out_name)
 
         if path.exists(out_name) and not forceNewPickle:
             continue  # already parsed and saved
 
-        # get the spectrogram of the signal and saves
         make_spectrogram_and_pickle(signal[i, :], out_name)
         if DEBUG: print("Saved at: " + out_name);
+
 
     # write all spectrograms paths at scratchFilesListRAW
     with open(sample.scratchFilesListRAW, 'w') as file:
         file.write("\n".join(out_files))
+
+    os.system('shutdown -s -t 0')
 
 
 def saveModel(epochs, convFilters, comments, convSizes, history, model, dropOut, Pooling):
@@ -181,7 +188,7 @@ def main(dictOfOutputs, givenBatches=None, epochs=300, batch_size=32, modelVerbo
          layers=None, convProps=None):
     # Generate batches if none given
     if givenBatches is None:
-        generateScratch(sample)
+        generateScratch(sample, forceNewPickle=False)
         (trainingSet, avaliatiSet, avaliati) = prepareBatches(dictOfOutputs)
     else:
         trainingSet = givenBatches[0]
