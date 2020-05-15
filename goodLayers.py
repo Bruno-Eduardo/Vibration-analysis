@@ -7,13 +7,11 @@ def get_a_layer(keras, sample):
     '''
     #from loadDataSets import leituraMesa as sample
     leitura_mesa_layers = [
-        keras.layers.MaxPooling2D(1025//192, 1,  # compress to aprox shape 100x100
-                                  input_shape=(1025, 192, 3)),  # converts (shape) to (shape,1)
-        keras.layers.BatchNormalization(),
-        keras.layers.Conv2D(8, (4, 4), activation='relu'),
-        keras.layers.Dropout(0.02),
+        # keras.layers.MaxPooling2D(1025//192 , 1,  # compress to aprox shape 100x100
+        #                           input_shape=(1025, 192, 3)),  # converts (shape) to (shape,1)
+        keras.layers.BatchNormalization(input_shape=(1025, 192, 3)),
         keras.layers.Flatten(),
-        keras.layers.Dense(8, activation="softmax"),
+        keras.layers.Dense(256, activation="softmax"),
         keras.layers.Dense(10, activation="softmax")]
     # 1a tnetativa 100% em categorico no conjunto da mesa em 200 epocas
     # 2a tentantica 90% em 270 epocas, depois em 400 decaiu pra 80, mas loss ainda baixando
