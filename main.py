@@ -14,7 +14,7 @@ from tensorflow.keras import backend as Kbackend
 
 from loadDataSets import leituraMesa, simulado3out, simulado10out, leitura1902, DatasetNdimentional
 from generalUtil import np, csv2array, confusionMatrixPrint, make_spectrogram_and_pickle
-# from generalUtil import plotD, debug, quit
+from generalUtil import plotD, debug, quit
 
 from generalUtil import make_spectrogram_N_dim_and_pickle # TODO: gambiarra aqui. Deveria ser pelo sample
 
