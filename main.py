@@ -200,8 +200,8 @@ def main(dictOfOutputs, givenBatches=None, epochs=300, batch_size=32, modelVerbo
 
     # Generate keras model and compile
     model = keras.Sequential(layers)
-    model.compile(optimizer=keras.optimizers.Adam(decay=1e-6,
-                                                  learning_rate=0.0005),
+    model.compile(optimizer=keras.optimizers.Adam(decay=1e-4,
+                                                  learning_rate=0.1),
                   loss='categorical_crossentropy',
                   metrics=['accuracy', 'categorical_accuracy'])
 
@@ -233,7 +233,7 @@ if __name__ == '__main__':
     K = 10
     val_cat = []
 
-    ret = main(dictOfOutputs=sample.distancesDict, batch_size=16, layers=goodLayers.get_a_layer(keras, sample),
+    ret = main(dictOfOutputs=sample.distancesDict, batch_size=57, layers=goodLayers.get_a_layer(keras, sample),
                epochs=1000)
     #
     # for _ in range(K):
