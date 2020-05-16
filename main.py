@@ -42,10 +42,11 @@ def getBatch(set2process, dictOfOutputs, size=-1, reset=False):
         if DEBUG: print(file, end="")
 
         # Prepare D
-        D = pickle.load(pickledFile)
-#        # plotD(D)                                       #----------------------------------- Remover para plotar as ffts
-#        D = np.resize(D, (D.shape[0], D.shape[1], sample.channels))  # making D a "channel last" tensor
-        D = D.astype(np.uint8)
+        D = pickle.load(pickledFile)+80
+        D = np.resize(D, (D.shape[0], D.shape[1], sample.channels))  # making D a "channel last" tensor
+        D = D[:,:,0].astype(np.uint8)
+        D = np.resize(D, (D.shape[0], D.shape[1], 1))
+        # plotD(D[:,:,0])                                       #----------------------------------- Remover para plotar as ffts
 
         # Prepare Y (one hot array)
         Y = np.zeros(len(dictOfOutputs), dtype=int)
