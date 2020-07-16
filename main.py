@@ -24,7 +24,8 @@ print('Done!')
 
 sample = leitura1902
 
-DEBUG = True
+DEBUG = False # True
+plot_enable = False # True
 
 
 def getBatch(set2process, dictOfOutputs, size=-1, reset=False):
@@ -47,9 +48,10 @@ def getBatch(set2process, dictOfOutputs, size=-1, reset=False):
         # Prepare D
         D = pickle.load(pickledFile)
         D = np.resize(D, (D.shape[0], D.shape[1], sample.channels))  # making D a "channel last" tensor
-        D = D[:,:,0].astype(np.uint8)
-        D = np.resize(D, (D.shape[0], D.shape[1], 1))
-        # plotD(D[:,:,0])                                       #----------------------------------- Remover para plotar as ffts
+        # D = D[:,:,0].astype(np.uint8)
+        # D = np.resize(D, (D.shape[0], D.shape[1], 1))
+        if plot_enable:
+            plotD(D[:,:,0])                                       #----------------------------------- Remover para plotar as ffts
 
         # Prepare Y (one hot array)
         Y = np.zeros(len(dictOfOutputs), dtype=int)
@@ -73,6 +75,8 @@ def getBatch(set2process, dictOfOutputs, size=-1, reset=False):
     batchX = np.stack(batchX, axis=0)
     batchY = np.stack(batchY, axis=0)
     print("stacking DONE!")
+
+    print('-'*40, np.sum(batchY, axis=0))
 
     return batchX[:, :, :, :], batchY
 
@@ -101,7 +105,8 @@ def prepareBatches(dictOfOutputs):
         #    print('p found. Dbg here!')
         possibleOutput = [value for key, value in dictOfOutputs.items() if key == re.sub(r'\d+N.*', '', sampleFile)]
         if not possibleOutput: raise Exception(sampleFile + "not found in dict of Outputs")
-        return max(possibleOutput)
+        if len(possibleOutput) > 1: raise Exception(sampleFile + " has ambiguous name")
+        return possibleOutput[0]
 
     for sampleFile in scratchFilesList:
         try:
@@ -110,8 +115,10 @@ def prepareBatches(dictOfOutputs):
             mappedSamples[getOutput(sampleFile)] = [sampleFile]
 
     for key, value in mappedSamples.items():
+        if DEBUG: print(key)
         l = mappedSamples[key]
         random.shuffle(l)
+        if DEBUG: print(l[0:5])
 
         # proportion or numbers of training
         cut = .9
