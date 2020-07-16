@@ -23,7 +23,7 @@ def make_spectrogram_N_dim_and_pickle(csv_file, out_name):
                              hop_length=n_of_time_samples//200+1)
 
         if D.shape[1] < 192:
-            print('sample too small'); print('Discarding');
+            #print('sample too small'); print('Discarding');
             return False
 
         spectrograms_list.append(D[:,0:192])
