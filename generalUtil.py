@@ -13,6 +13,26 @@ import pickle
 from sklearn.metrics import confusion_matrix
 
 
+def make_spectrogram_N_dim_and_pickle(csv_file, out_name):
+    data = np.loadtxt(csv_file, delimiter=',')
+    n_of_time_samples, n_of_dim = data.shape
+    spectrograms_list = []
+
+    for dim in range(n_of_dim):
+        D = make_spectrogram(np.asfortranarray(data[:,dim]),
+                             hop_length=n_of_time_samples//200+1)
+
+        if D.shape[1] < 192:
+            print('sample too small'); print('Discarding');
+            return False
+
+        spectrograms_list.append(D[:,0:192])
+
+    spectrograms = np.stack(spectrograms_list, axis=2)
+    pickle.dump(spectrograms, open(out_name, 'wb'))
+
+    return True
+
 def make_spectrogram_and_pickle(signal, out_name, hop_length=1, ref=np.max):
     D = make_spectrogram(signal, hop_length=hop_length, ref=ref)
     pickle.dump(D, open(out_name, 'wb'))
