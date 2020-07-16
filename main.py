@@ -41,6 +41,9 @@ def getBatch(set2process, dictOfOutputs, size=-1, reset=False):
                                         file), 'rb')
         if DEBUG: print(file, end="")
 
+        if "esp" in file:
+            continue #print('stop')
+
         # Prepare D
         D = pickle.load(pickledFile)+80
         D = np.resize(D, (D.shape[0], D.shape[1], sample.channels))  # making D a "channel last" tensor
@@ -52,6 +55,10 @@ def getBatch(set2process, dictOfOutputs, size=-1, reset=False):
         Y = np.zeros(len(dictOfOutputs), dtype=int)
         Y[dictOfOutputs[re.sub(r'\d+N.*', '', file)]] = 1
         if DEBUG: print(", label:" + str(Y))
+
+
+        #if re.sub(r'\d+N.*', '', file) not in ["z", "q"]:
+        #    continue
 
         batchX.append(D)
         batchY.append(Y)
@@ -81,7 +88,8 @@ def prepareBatches(dictOfOutputs):
             line = line.replace('\n', '\r').replace('\r', '') # TODO check @ windows
             line = line.replace(os.path.join(sample.dataSetRawPath, "scratch"), "").replace('/', '')
             if 'txt' in line:
-                scratchFilesList.append(line)
+                if 'esp' not in line:
+                    scratchFilesList.append(line)
             else:
                 raise Exception('amostra.scratchFilesListRAW may be corrupted. Check ' + sample.scratchFilesListRAW)
 
@@ -92,7 +100,10 @@ def prepareBatches(dictOfOutputs):
     # cut = int(22/3)
 
     def getOutput(sampleFile, dictOfOutputs=dictOfOutputs):
-        possibleOutput = [value for key, value in dictOfOutputs.items() if key in sampleFile]
+        # FIXME WRONG IF SAMPLEFILE IS ESP*
+        #if 'p' in sampleFile:
+        #    print('p found. Dbg here!')
+        possibleOutput = [value for key, value in dictOfOutputs.items() if key == re.sub(r'\d+N.*', '', sampleFile)]
         if not possibleOutput: raise Exception(sampleFile + "not found in dict of Outputs")
         return max(possibleOutput)
 
@@ -136,6 +147,8 @@ def generateScratch(sample, forceNewPickle=False):
         os.mkdir(scratch_dir)
 
     for file in sample.csv_file_list:
+        if 'esp' in file:
+            continue
         out_name = file.replace('.csv', '.txt')
         out_name_with_path = os.path.join(  sample.dataSetRawPath,
                                             "scratch",
