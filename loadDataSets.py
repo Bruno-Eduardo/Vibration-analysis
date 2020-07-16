@@ -30,7 +30,8 @@ class Dataset():
         if not shapeIsRevelevant or self.labelFileCSV is None:
             return None
 
-        data = self.parser(self.dataSetRawPath + "\\" + self.dataFileCSV, self.dataSetRawPath + "\\" + self.labelFileCSV)
+        data = self.parser(os.path.join(self.dataSetRawPath, self.dataFileCSV),
+		           os.path.join(self.dataSetRawPath, self.labelFileCSV))
         signal = data[0]    # TODO this method runs the whole list of files to get just the first data. \
                             #   Needs a better implementation
         return librosa.amplitude_to_db(np.abs(librosa.stft(signal[0,:],hop_length=1)), ref=np.max).shape
@@ -39,13 +40,14 @@ class Dataset():
         file = self.dataFileCSV if file is None else file
         labels_csv = self.labelFileCSV if labels_csv is None else labels_csv
 
-        return self.parser(self.dataSetRawPath + "\\" + file, self.dataSetRawPath + "\\" + labels_csv)
+        return self.parser(os.path.join(self.dataSetRawPath, file),
+                           os.path.join(self.dataSetRawPath, labels_csv))
 
     def get_out_name(self, class_, iteration, main_name=None, spacer=None, extension='.txt'):
         main_name = self.mainName if main_name is None else main_name
         spacer = self.spacer if spacer is None else spacer
 
-        return self.dataSetRawPath + '\\scratch\\' + main_name + class_ + spacer + str(iteration) + extension
+        return os.path.join(self.dataSetRawPath, 'scratch', main_name, class_,spacer, str(iteration), extension)
 
     def __str__(self):
         return str(self.__dict__)
@@ -83,8 +85,11 @@ class DatasetNdimentional(Dataset):
 
     def getShapeFromFirstSample(self, shapeIsRevelevant):
         first_sample = self.get_first_sample()
-        first_data = csv2array(os.path.join(self.dataSetRawPath, first_sample))[:,-1]
-        signal = make_spectrogram(first_data)
+        first_data = csv2array(os.path.join(self.dataSetRawPath, first_sample))[:,0]
+        try:
+            signal = make_spectrogram(first_data)
+        except librosa.util.exceptions.ParameterError:
+            signal = make_spectrogram(np.asfortranarray(first_data.copy()))
         return signal.shape
 
     def get_label_list(self):
@@ -123,7 +128,7 @@ simulado10out   = Dataset(r"F:\BrunoDeepLearning\ICvibracoesMesa\vibracoesSimula
                           dataFileCSV = 'impactos.csv',
                           labelFileCSV = 'labels.csv')
 
-leitura1902     = DatasetNdimentional(r"F:\BrunoDeepLearning\ICvibracoesMesa\amostras1902\parsed")
+leitura1902     = DatasetNdimentional(os.path.join(r"../ICvibracoesMesa/amostras1902", "splited"))
 
 if __name__ == '__main__':
     print(leituraMesa)
