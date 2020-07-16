@@ -46,10 +46,10 @@ def getBatch(set2process, dictOfOutputs, size=-1, reset=False):
 
     for i in range(size):
         try:
-            pickledFile = open(sample.dataSetRawPath + '\\scratch\\' + set2process[getBatch.lastProcessedFile], 'rb')
+            pickledFile = open(os.path.join(sample.dataSetRawPath, "scratch", set2process[getBatch.lastProcessedFile]), 'rb')
         except:
             getBatch.lastProcessedFile = getBatch.lastProcessedFile % len(set2process)
-            pickledFile = open(sample.dataSetRawPath + '\\scratch\\' + set2process[getBatch.lastProcessedFile], 'rb')
+            pickledFile = open(os.path.join(sample.dataSetRawPath, "scratch", sset2process[getBatch.lastProcessedFile]), 'rb')
 
         D = (pickle.load(pickledFile)) + 80
 
@@ -90,7 +90,7 @@ def prepareBatches(dictOfOutputs):
     with open(sample.scratchFilesListRAW, 'r', encoding="utf8") as file:
         for line in file:
             line = line.replace('\n', '\r').replace('\r', '').replace('/', '\\')  # TODO find a better parser
-            line = line.replace(sample.dataSetRawPath + "\\scratch\\", "")
+            line = line.replace(os.path.join(sample.dataSetRawPath + "scratch"), "")
             if 'txt' in line:
                 scratchFilesList.append(line)
             else:
@@ -147,8 +147,8 @@ def generateScratch(sample, forceNewPickle=False):
     out_files = []
 
     # create scratch directory if it does not exist
-    if not path.exists(sample.dataSetRawPath + '\\scratch'):
-        os.mkdir(sample.dataSetRawPath + '\\scratch')
+    if not path.exists(os.path.join(sample.dataSetRawPath, "scratch")):
+        os.mkdir(os.path.join(sample.dataSetRawPath, "scratch"))
 
     for i in range(length):
         out_name = sample.get_out_name(str(int(labels[i])), i)
