@@ -61,7 +61,7 @@ class DatasetNdimentional(Dataset):
         print(self.channels)
         self.parser = csv2array3D
         self.classes, self.dimensions = self.get_meta_info()
-        self.channels = len(self.dimensions)
+        self.channels = 3 # TODO len(self.dimensions)
 
     def get_meta_info(self):
         classes = set()
@@ -99,22 +99,21 @@ class DatasetNdimentional(Dataset):
             list_of_labels.append(label)
         return list_of_labels
 
-
-leituraMesa     = Dataset(r"F:\BrunoDeepLearning\ICvibracoesMesa\leitura0710",
-                          r"F:\BrunoDeepLearning\ICvibracoesMesa\VibrationsScratchFiles.txt",
+leituraMesa     = Dataset(r"../ICvibracoesMesa/leitura0710",
+                          r"../ICvibracoesMesa/VibrationsScratchFiles.txt",
                           {"impactos1":0, "impactos4":1, "impactos8":2},
                           dataFileCSV = 'impactos.csv',
                           labelFileCSV = 'labels.csv',
                           shapeIsRevelevant=True)
 
-simulado3out    = Dataset(r"F:\BrunoDeepLearning\ICvibracoesMesa\vibracoesSimuladas",
-                          r"F:\BrunoDeepLearning\ICvibracoesMesa\SimulatedVibrationsScratchFiles.txt",
+simulado3out    = Dataset(r"../ICvibracoesMesa/vibracoesSimuladas",
+                          r"../ICvibracoesMesa/SimulatedVibrationsScratchFiles.txt",
                           {"impactos1":0, "impactos2":1, "impactos3":2},
                           dataFileCSV = 'impactos.csv',
                           labelFileCSV = 'labels.csv')
 
-simulado10out   = Dataset(r"F:\BrunoDeepLearning\ICvibracoesMesa\vibracoesSimuladasMuitoDiscreta",
-                          r"F:\BrunoDeepLearning\ICvibracoesMesa\SimulatedVibrationsTenCategoriesScratchFiles.txt",
+simulado10out   = Dataset(r"../ICvibracoesMesa/vibracoesSimuladasMuitoDiscreta",
+                          r"../ICvibracoesMesa/SimulatedVibrationsTenCategoriesScratchFiles.txt",
                           {"impactos1": 0,
                            "impactos2": 1,
                            "impactos3": 2,
