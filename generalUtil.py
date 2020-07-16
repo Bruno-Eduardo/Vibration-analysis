@@ -50,7 +50,6 @@ def make_spectrogram(signal, hop_length=1, ref=np.max):
     except IndexError:
         # Data is unidimensional so just make the spectrogram
         D = librosa.amplitude_to_db(np.abs(librosa.stft(signal, hop_length=hop_length)), ref=ref)
-        print('making histogram')
         return D
 
 
@@ -70,6 +69,11 @@ def get_meta_info_from_file_name(file_name):
 
 
 def csv2array3D(files_list, classes=["a"], dimensions=("x", "y", "z"), path="./"):
+
+    # FIXME O erro esta aqui
+    #    A stack nao tem tamanho constante então np.stack nao funciona
+    #   update:dimensions esta vindo {'N'}
+
     length = 0
     labels = []
     ready_data = []
