@@ -45,7 +45,7 @@ def getBatch(set2process, dictOfOutputs, size=-1, reset=False):
             continue #print('stop')
 
         # Prepare D
-        D = pickle.load(pickledFile)+80
+        D = pickle.load(pickledFile)
         D = np.resize(D, (D.shape[0], D.shape[1], sample.channels))  # making D a "channel last" tensor
         D = D[:,:,0].astype(np.uint8)
         D = np.resize(D, (D.shape[0], D.shape[1], 1))
@@ -95,10 +95,6 @@ def prepareBatches(dictOfOutputs):
 
     mappedSamples = {}
 
-    # proportion or numbers of training
-    cut = .8
-    # cut = int(22/3)
-
     def getOutput(sampleFile, dictOfOutputs=dictOfOutputs):
         # FIXME WRONG IF SAMPLEFILE IS ESP*
         #if 'p' in sampleFile:
@@ -117,6 +113,9 @@ def prepareBatches(dictOfOutputs):
         l = mappedSamples[key]
         random.shuffle(l)
 
+        # proportion or numbers of training
+        cut = .9
+        # cut = int(22/3)
         if cut < 1: cut = int(len(l) * cut)  # if cut represents a proportion, parse to absolute number
 
         training.extend(l[0:cut])
@@ -214,10 +213,9 @@ def main(dictOfOutputs, givenBatches=None, epochs=300, batch_size=32, modelVerbo
 
     # Generate keras model and compile
     model = keras.Sequential(layers)
-    model.compile(optimizer=keras.optimizers.Adam(decay=1e-4,
-                                                  learning_rate=0.1),
+    model.compile(optimizer=keras.optimizers.Adam(),
                   loss='categorical_crossentropy',
-                  metrics=['accuracy', 'categorical_accuracy'])
+                  metrics=['accuracy'])
 
     # fit keras model
     print("Fitting...")
@@ -247,8 +245,8 @@ if __name__ == '__main__':
     K = 10
     val_cat = []
 
-    ret = main(dictOfOutputs=sample.distancesDict, batch_size=57, layers=goodLayers.get_a_layer(keras, sample),
-               epochs=1000)
+    ret = main(dictOfOutputs=sample.distancesDict, batch_size=128, layers=goodLayers.get_a_layer(keras, sample),
+               epochs=250)
     #
     # for _ in range(K):
     #     ret = main(dictOfOutputs=sample.distancesDict, batch_size=16, layers=goodLayers.get_a_layer(keras, sample),
