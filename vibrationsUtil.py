@@ -1,3 +1,7 @@
+#!/usr/bin/python3
+import warnings
+warnings.simplefilter(action='ignore', category=FutureWarning)
+
 from os import listdir
 import os.path
 from os import path
