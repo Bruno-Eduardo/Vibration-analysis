@@ -151,6 +151,7 @@ def generateScratch(sample, forceNewPickle=False):
         os.mkdir(os.path.join(sample.dataSetRawPath, "scratch"))
 
     for i in range(length):
+        quit()
         out_name = sample.get_out_name(str(int(labels[i])), i)
         out_files.append(out_name)
 
