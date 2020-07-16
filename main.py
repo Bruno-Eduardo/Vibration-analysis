@@ -2,23 +2,21 @@
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
-from os import listdir
-import os.path
-from os import path
 import os
+import re
 import random
 import pickle
 import statistics
 
-import librosa.display
-# import tensorflow.compat.v1 as tf
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import backend as Kbackend
 
 from loadDataSets import leituraMesa, simulado3out, simulado10out, leitura1902, DatasetNdimentional
 from generalUtil import np, csv2array, confusionMatrixPrint, make_spectrogram_and_pickle
-# from generalUtil import plotD, debug, quit
+from generalUtil import plotD, debug, quit
+
+from generalUtil import make_spectrogram_N_dim_and_pickle # TODO: gambiarra aqui. Deveria ser pelo sample
 
 import goodLayers
 
@@ -26,58 +24,60 @@ print('Done!')
 
 sample = leitura1902
 
-DEBUG = True
+DEBUG = False # True
+plot_enable = False # True
 
 
 def getBatch(set2process, dictOfOutputs, size=-1, reset=False):
     if size == -1:
         size = len(set2process)
-    try:
-        getBatch.lastProcessedFile  # TODO remove this counter, it beceme unecessary since keras
-    except:
-        getBatch.lastProcessedFile = 0
-    if reset:
-        getBatch.lastProcessedFile = 0
-        return
     lastPrintedFlag = -1
 
-    batchX = []
-    batchY = []
+    batchX, batchY = [], []
 
-    for i in range(size):
-        try:
-            pickledFile = open(os.path.join(sample.dataSetRawPath, "scratch", set2process[getBatch.lastProcessedFile]), 'rb')
-        except:
-            getBatch.lastProcessedFile = getBatch.lastProcessedFile % len(set2process)
-            pickledFile = open(os.path.join(sample.dataSetRawPath, "scratch", sset2process[getBatch.lastProcessedFile]), 'rb')
+    for file, counter in zip(set2process, range(size)):
 
-        D = (pickle.load(pickledFile)) + 80
+        pickledFile = open(os.path.join(sample.dataSetRawPath,
+                                        "scratch",
+                                        file), 'rb')
+        if DEBUG: print(file, end="")
 
-        if DEBUG: print(set2process[getBatch.lastProcessedFile], end="")
-        # plotD(D)                                       #----------------------------------- Remover para plotar as ffts
+        if "esp" in file:
+            continue #print('stop')
 
+        # Prepare D
+        D = pickle.load(pickledFile)
         D = np.resize(D, (D.shape[0], D.shape[1], sample.channels))  # making D a "channel last" tensor
-        D = D.astype(np.uint8)
+        # D = D[:,:,0].astype(np.uint8)
+        # D = np.resize(D, (D.shape[0], D.shape[1], 1))
+        if plot_enable:
+            plotD(D[:,:,0])                                       #----------------------------------- Remover para plotar as ffts
 
+        # Prepare Y (one hot array)
         Y = np.zeros(len(dictOfOutputs), dtype=int)
-        Y[dictOfOutputs[set2process[getBatch.lastProcessedFile].split('in', 1)[0]]] = 1
+        Y[dictOfOutputs[re.sub(r'\d+N.*', '', file)]] = 1
         if DEBUG: print(", label:" + str(Y))
+
+
+        #if re.sub(r'\d+N.*', '', file) not in ["z", "q"]:
+        #    continue
 
         batchX.append(D)
         batchY.append(Y)
 
-        printCandidate = int(10 * getBatch.lastProcessedFile / size)
+        # DEBUG print
+        printCandidate = int(10 * counter / size)
         if lastPrintedFlag != printCandidate:
             lastPrintedFlag = printCandidate
             if DEBUG: print(str(10 * printCandidate) + "%")
-        getBatch.lastProcessedFile += 1
 
     print("stacking...")
     batchX = np.stack(batchX, axis=0)
     batchY = np.stack(batchY, axis=0)
     print("stacking DONE!")
 
-    getBatch([], dictOfOutputs, reset=True)  # TODO check if still needed
+    print('-'*40, np.sum(batchY, axis=0))
+
     return batchX[:, :, :, :], batchY
 
 
@@ -89,24 +89,24 @@ def prepareBatches(dictOfOutputs):
 
     with open(sample.scratchFilesListRAW, 'r', encoding="utf8") as file:
         for line in file:
-            line = line.replace('\n', '\r').replace('\r', '').replace('/', '\\')  # TODO find a better parser
-            line = line.replace(os.path.join(sample.dataSetRawPath + "scratch"), "")
+            line = line.replace('\n', '\r').replace('\r', '') # TODO check @ windows
+            line = line.replace(os.path.join(sample.dataSetRawPath, "scratch"), "").replace('/', '')
             if 'txt' in line:
-                scratchFilesList.append(line)
+                if 'esp' not in line:
+                    scratchFilesList.append(line)
             else:
                 raise Exception('amostra.scratchFilesListRAW may be corrupted. Check ' + sample.scratchFilesListRAW)
 
     mappedSamples = {}
 
-    # proportion or numbers of training
-    cut = .8
-
-    # cut = int(22/3)
-
     def getOutput(sampleFile, dictOfOutputs=dictOfOutputs):
-        possibleOutput = [value for key, value in dictOfOutputs.items() if key in sampleFile]
+        # FIXME WRONG IF SAMPLEFILE IS ESP*
+        #if 'p' in sampleFile:
+        #    print('p found. Dbg here!')
+        possibleOutput = [value for key, value in dictOfOutputs.items() if key == re.sub(r'\d+N.*', '', sampleFile)]
         if not possibleOutput: raise Exception(sampleFile + "not found in dict of Outputs")
-        return max(possibleOutput)
+        if len(possibleOutput) > 1: raise Exception(sampleFile + " has ambiguous name")
+        return possibleOutput[0]
 
     for sampleFile in scratchFilesList:
         try:
@@ -115,9 +115,14 @@ def prepareBatches(dictOfOutputs):
             mappedSamples[getOutput(sampleFile)] = [sampleFile]
 
     for key, value in mappedSamples.items():
+        if DEBUG: print(key)
         l = mappedSamples[key]
         random.shuffle(l)
+        if DEBUG: print(l[0:5])
 
+        # proportion or numbers of training
+        cut = .9
+        # cut = int(22/3)
         if cut < 1: cut = int(len(l) * cut)  # if cut represents a proportion, parse to absolute number
 
         training.extend(l[0:cut])
@@ -137,37 +142,51 @@ def prepareBatches(dictOfOutputs):
 def generateScratch(sample, forceNewPickle=False):
 
     print('generating scratch')
-    if isinstance(sample, DatasetNdimentional):
-        labels = sample.get_label_list()
-        length = sample.length
-        signal = sample.parse()
-    else:
-        signal,labels,length = sample.parse()
+    #TODO refacor this hell
+    length = len(sample.csv_file_list)
 
     out_files = []
 
     # create scratch directory if it does not exist
-    if not path.exists(os.path.join(sample.dataSetRawPath, "scratch")):
-        os.mkdir(os.path.join(sample.dataSetRawPath, "scratch"))
+    scratch_dir = os.path.join(sample.dataSetRawPath, "scratch")
+    if not os.path.exists(scratch_dir):
+        os.mkdir(scratch_dir)
 
-    for i in range(length):
-        quit()
-        out_name = sample.get_out_name(str(int(labels[i])), i)
-        out_files.append(out_name)
+    for file in sample.csv_file_list:
+        if 'esp' in file:
+            continue
+        out_name = file.replace('.csv', '.txt')
+        out_name_with_path = os.path.join(  sample.dataSetRawPath,
+                                            "scratch",
+                                            out_name)
+        out_files.append(out_name_with_path)
+        class_ = re.sub(r'\d+N.*', '', out_name)
 
-        if path.exists(out_name) and not forceNewPickle:
-            continue  # already parsed and saved
+        try:
+            sample.dictOfOutputs
+        except AttributeError:
+            sample.dictOfOutputs = {class_: 0}
+        if class_ not in sample.dictOfOutputs:
+            sample.dictOfOutputs[class_] = 1 + sample.dictOfOutputs[
+                                                    max(sample.dictOfOutputs,
+                                                    key=sample.dictOfOutputs.get)]
 
-        make_spectrogram_and_pickle(signal[i, :], out_name)
-        if DEBUG: print("Saved at: " + out_name);
+        file_with_path = os.path.join( sample.dataSetRawPath, file)
 
+        if os.path.exists(out_name_with_path) and (not forceNewPickle):
+            continue
+
+        success = make_spectrogram_N_dim_and_pickle(file_with_path, out_name_with_path)
+        if success:
+            if DEBUG: print("Saved at: " + out_name);
+        else:
+            out_files.pop()
 
     # write all spectrograms paths at scratchFilesListRAW
     with open(sample.scratchFilesListRAW, 'w') as file:
         file.write("\n".join(out_files))
 
-    os.system('shutdown -s -t 0')
-
+    print("sample.dictOfOutputs:", sample.dictOfOutputs)
 
 def saveModel(epochs, convFilters, comments, convSizes, history, model, dropOut, Pooling):
     print("Saving at Results.txt...")
@@ -194,17 +213,16 @@ def main(dictOfOutputs, givenBatches=None, epochs=300, batch_size=32, modelVerbo
     # Generate batches if none given
     if givenBatches is None:
         generateScratch(sample, forceNewPickle=False)
-        (trainingSet, avaliatiSet, avaliati) = prepareBatches(dictOfOutputs)
+        (trainingSet, avaliatiSet, avaliati) = prepareBatches(sample.dictOfOutputs)
     else:
         trainingSet = givenBatches[0]
         avaliatiSet = givenBatches[1]
 
     # Generate keras model and compile
     model = keras.Sequential(layers)
-    model.compile(optimizer=keras.optimizers.Adam(decay=1e-6,
-                                                  learning_rate=0.0005),
+    model.compile(optimizer=keras.optimizers.Adam(),
                   loss='categorical_crossentropy',
-                  metrics=['accuracy', 'categorical_accuracy'])
+                  metrics=['accuracy'])
 
     # fit keras model
     print("Fitting...")
@@ -234,15 +252,18 @@ if __name__ == '__main__':
     K = 10
     val_cat = []
 
-    for _ in range(K):
-        ret = main(dictOfOutputs=sample.distancesDict, batch_size=16, layers=goodLayers.get_a_layer(keras, sample),
-                   epochs=200)
-        Kbackend.clear_session()
-        tf.keras.backend.clear_session()
-        keras.backend.clear_session()
-        val_cat.append(ret[0].item() * 100)
-
-    print(type(val_cat[0]))
-    print(val_cat)
-    print(statistics.mean(val_cat))
-    print(statistics.stdev(val_cat))
+    ret = main(dictOfOutputs=sample.distancesDict, batch_size=128, layers=goodLayers.get_a_layer(keras, sample),
+               epochs=250)
+    #
+    # for _ in range(K):
+    #     ret = main(dictOfOutputs=sample.distancesDict, batch_size=16, layers=goodLayers.get_a_layer(keras, sample),
+    #                epochs=200)
+    #     Kbackend.clear_session()
+    #     tf.keras.backend.clear_session()
+    #     keras.backend.clear_session()
+    #     val_cat.append(ret[0].item() * 100)
+    #
+    # print(type(val_cat[0]))
+    # print(val_cat)
+    # print(statistics.mean(val_cat))
+    # print(statistics.stdev(val_cat))
