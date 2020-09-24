@@ -253,7 +253,7 @@ if __name__ == '__main__':
     val_cat = []
 
     ret = main(dictOfOutputs=sample.distancesDict, batch_size=64, layers=goodLayers.get_a_layer(keras, sample),
-               epochs=1000)
+               epochs=400)
     #
     # for _ in range(K):
     #     ret = main(dictOfOutputs=sample.distancesDict, batch_size=16, layers=goodLayers.get_a_layer(keras, sample),
