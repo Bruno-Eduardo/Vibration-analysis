@@ -12,7 +12,7 @@ import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import backend as Kbackend
 
-from loadDataSets import leituraMesa, simulado3out, simulado10out, leitura1902, DatasetNdimentional
+from loadDataSets import leitura1902, DatasetNdimentional
 from generalUtil import np, csv2array, confusionMatrixPrint, make_spectrogram_and_pickle
 from generalUtil import plotD, debug, quit
 
@@ -252,8 +252,8 @@ if __name__ == '__main__':
     K = 10
     val_cat = []
 
-    ret = main(dictOfOutputs=sample.distancesDict, batch_size=128, layers=goodLayers.get_a_layer(keras, sample),
-               epochs=250)
+    ret = main(dictOfOutputs=sample.distancesDict, batch_size=64, layers=goodLayers.get_a_layer(keras, sample),
+               epochs=400)
     #
     # for _ in range(K):
     #     ret = main(dictOfOutputs=sample.distancesDict, batch_size=16, layers=goodLayers.get_a_layer(keras, sample),

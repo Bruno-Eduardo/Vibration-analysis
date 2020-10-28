@@ -99,34 +99,6 @@ class DatasetNdimentional(Dataset):
             list_of_labels.append(label)
         return list_of_labels
 
-leituraMesa     = Dataset(r"../ICvibracoesMesa/leitura0710",
-                          r"../ICvibracoesMesa/VibrationsScratchFiles.txt",
-                          {"impactos1":0, "impactos4":1, "impactos8":2},
-                          dataFileCSV = 'impactos.csv',
-                          labelFileCSV = 'labels.csv',
-                          shapeIsRevelevant=True)
-
-simulado3out    = Dataset(r"../ICvibracoesMesa/vibracoesSimuladas",
-                          r"../ICvibracoesMesa/SimulatedVibrationsScratchFiles.txt",
-                          {"impactos1":0, "impactos2":1, "impactos3":2},
-                          dataFileCSV = 'impactos.csv',
-                          labelFileCSV = 'labels.csv')
-
-simulado10out   = Dataset(r"../ICvibracoesMesa/vibracoesSimuladasMuitoDiscreta",
-                          r"../ICvibracoesMesa/SimulatedVibrationsTenCategoriesScratchFiles.txt",
-                          {"impactos1": 0,
-                           "impactos2": 1,
-                           "impactos3": 2,
-                           "impactos4": 3,
-                           "impactos5": 4,
-                           "impactos6": 5,
-                           "impactos7": 6,
-                           "impactos8": 7,
-                           "impactos9": 8,
-                           "impactos10": 9},
-                          dataFileCSV = 'impactos.csv',
-                          labelFileCSV = 'labels.csv')
-
 leitura1902     = DatasetNdimentional(os.path.join(r"../ICvibracoesMesa/amostras1902", "splited"))
 
 if __name__ == '__main__':
