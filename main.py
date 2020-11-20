@@ -25,7 +25,7 @@ print('Done!')
 sample = leitura1902
 
 DEBUG = False # True
-plot_enable = False # True
+plot_enable = True
 
 
 def getBatch(set2process, dictOfOutputs, size=-1, reset=False):
