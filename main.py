@@ -46,10 +46,10 @@ def getBatch(set2process, dictOfOutputs, size=-1, reset=False):
             continue #print('stop')
 
         # Prepare D
-        D = pickle.load(pickledFile)
-        D = np.resize(D, (D.shape[0], D.shape[1], sample.channels))  # making D a "channel last" tensor
-        # D = D[:,:,0].astype(np.uint8)
-        # D = np.resize(D, (D.shape[0], D.shape[1], 1))
+        D = pickle.load(pickledFile)[:,:,0]
+        D = np.resize(D, (D.shape[0], D.shape[1], 1))  # making D a "channel last" tensor
+        D = D[:,:,0].astype(np.uint8)
+        D = np.resize(D, (D.shape[0], D.shape[1], 1))
         if plot_enable:
             plotD(D[:,:,0])                                       #----------------------------------- Remover para plotar as ffts
 
@@ -253,7 +253,7 @@ if __name__ == '__main__':
     val_cat = []
 
     ret = main(dictOfOutputs=sample.distancesDict, batch_size=64, layers=goodLayers.get_a_layer(keras, sample),
-               epochs=1000)
+               epochs=400)
     #
     # for _ in range(K):
     #     ret = main(dictOfOutputs=sample.distancesDict, batch_size=16, layers=goodLayers.get_a_layer(keras, sample),

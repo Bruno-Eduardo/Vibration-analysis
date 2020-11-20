@@ -8,10 +8,11 @@ def get_a_layer(keras, sample):
     from loadDataSets import leitura1902 as sample
     leitura_mesa_layers = [
         keras.layers.MaxPooling2D(sample.shape[0] // 100, sample.shape[1] // 100,  # compress to aprox shape 100x100
-                                  input_shape=(1025, 192, 3)),  # converts (shape) to (shape,1)
+                                  input_shape=(1025, 192, 1)),  # converts (shape) to (shape,1)
         keras.layers.BatchNormalization(),
-        keras.layers.Conv2D(32+16, (4, 4), activation='relu'),
-        keras.layers.Dropout(0.75),
+        keras.layers.Conv2D(64, (2, 2), activation='relu'),
+        keras.layers.Dropout(0.85),
+        keras.layers.Conv2D(64, (2, 2), activation='relu'),
         keras.layers.Flatten(),
         #keras.layers.Dense(9, activation="softmax"),
         keras.layers.Dense(9, activation="softmax")]
