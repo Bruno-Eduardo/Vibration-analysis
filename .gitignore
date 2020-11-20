@@ -6,4 +6,4 @@ outputError.txt
 temp.txt
 .idea/
 *.bak
-
+logs/
