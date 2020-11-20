@@ -1,0 +1,30 @@
+diff --git a/goodLayers.py b/goodLayers.py
+index 469daa0..075fe01 100644
+--- a/goodLayers.py
++++ b/goodLayers.py
+@@ -10,8 +10,8 @@ def get_a_layer(keras, sample):
+         keras.layers.MaxPooling2D(sample.shape[0] // 100, sample.shape[1] // 100,  # compress to aprox shape 100x100
+                                   input_shape=(1025, 192, 3)),  # converts (shape) to (shape,1)
+         keras.layers.BatchNormalization(),
+-        keras.layers.Conv2D(32, (4, 4), activation='relu'),
+-        keras.layers.Dropout(0.2),
++        keras.layers.Conv2D(32+16, (4, 4), activation='relu'),
++        keras.layers.Dropout(0.75),
+         keras.layers.Flatten(),
+         #keras.layers.Dense(9, activation="softmax"),
+         keras.layers.Dense(9, activation="softmax")]
+diff --git a/main.py b/main.py
+index 3dc2abf..5e520b7 100755
+--- a/main.py
++++ b/main.py
+@@ -252,8 +252,8 @@ if __name__ == '__main__':
+     K = 10
+     val_cat = []
+ 
+-    ret = main(dictOfOutputs=sample.distancesDict, batch_size=128, layers=goodLayers.get_a_layer(keras, sample),
+-               epochs=250)
++    ret = main(dictOfOutputs=sample.distancesDict, batch_size=64, layers=goodLayers.get_a_layer(keras, sample),
++               epochs=1000)
+     #
+     # for _ in range(K):
+     #     ret = main(dictOfOutputs=sample.distancesDict, batch_size=16, layers=goodLayers.get_a_layer(keras, sample),
