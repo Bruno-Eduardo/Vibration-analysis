@@ -1,0 +1,84 @@
+WARNING:tensorflow:From /home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/ops/init_ops.py:1251: calling VarianceScaling.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Call initializer instance with the dtype argument instead of passing it to the constructor
+WARNING:tensorflow:Large dropout rate: 0.8 (>0.5). In TensorFlow 2.x, dropout() uses dropout rate instead of keep_prob. Please ensure that this is intended.
+2020-07-28 12:18:22.935171: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-07-28 12:18:23.054428: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2394310000 Hz
+2020-07-28 12:18:23.054900: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x5180f30 executing computations on platform Host. Devices:
+2020-07-28 12:18:23.054931: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): <undefined>, <undefined>
+2020-07-28 12:18:23.301708: W tensorflow/compiler/jit/mark_for_compilation_pass.cc:1412] (One-time warning): Not using XLA:CPU for cluster because envvar TF_XLA_FLAGS=--tf_xla_cpu_global_jit was not set.  If you want XLA:CPU, either set that envvar, or use experimental_jit_scope to enable XLA:CPU.  To confirm that XLA is active, pass --vmodule=xla_compilation_cache=1 (as a proper command-line flag, not via TF_XLA_FLAGS) or set the envvar XLA_FLAGS=--xla_hlo_profile.
+2020-07-28 12:18:23.959165: W tensorflow/core/framework/allocator.cc:107] Allocation of 151142400 exceeds 10% of system memory.
+2020-07-28 12:18:24.866497: W tensorflow/core/framework/allocator.cc:107] Allocation of 151142400 exceeds 10% of system memory.
+2020-07-28 12:18:25.122850: W tensorflow/core/framework/allocator.cc:107] Allocation of 151142400 exceeds 10% of system memory.
+2020-07-28 12:18:25.349264: W tensorflow/core/framework/allocator.cc:107] Allocation of 151142400 exceeds 10% of system memory.
+2020-07-28 12:18:25.572440: W tensorflow/core/framework/allocator.cc:107] Allocation of 151142400 exceeds 10% of system memory.
+WARNING:tensorflow:From /home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/ops/init_ops.py:1251: calling VarianceScaling.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Call initializer instance with the dtype argument instead of passing it to the constructor
+WARNING:tensorflow:Large dropout rate: 0.75 (>0.5). In TensorFlow 2.x, dropout() uses dropout rate instead of keep_prob. Please ensure that this is intended.
+2020-07-28 12:50:19.735425: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-07-28 12:50:21.662451: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2394310000 Hz
+2020-07-28 12:50:21.784828: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x52016c0 executing computations on platform Host. Devices:
+2020-07-28 12:50:21.784874: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): <undefined>, <undefined>
+2020-07-28 12:50:22.698224: W tensorflow/compiler/jit/mark_for_compilation_pass.cc:1412] (One-time warning): Not using XLA:CPU for cluster because envvar TF_XLA_FLAGS=--tf_xla_cpu_global_jit was not set.  If you want XLA:CPU, either set that envvar, or use experimental_jit_scope to enable XLA:CPU.  To confirm that XLA is active, pass --vmodule=xla_compilation_cache=1 (as a proper command-line flag, not via TF_XLA_FLAGS) or set the envvar XLA_FLAGS=--xla_hlo_profile.
+2020-07-28 12:50:25.406307: W tensorflow/core/framework/allocator.cc:107] Allocation of 151142400 exceeds 10% of system memory.
+2020-07-28 12:50:27.484536: W tensorflow/core/framework/allocator.cc:107] Allocation of 151142400 exceeds 10% of system memory.
+2020-07-28 12:50:27.715767: W tensorflow/core/framework/allocator.cc:107] Allocation of 151142400 exceeds 10% of system memory.
+2020-07-28 12:50:27.928349: W tensorflow/core/framework/allocator.cc:107] Allocation of 151142400 exceeds 10% of system memory.
+2020-07-28 12:50:28.138687: W tensorflow/core/framework/allocator.cc:107] Allocation of 151142400 exceeds 10% of system memory.
+WARNING:tensorflow:From /home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/ops/init_ops.py:1251: calling VarianceScaling.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Call initializer instance with the dtype argument instead of passing it to the constructor
+WARNING:tensorflow:Large dropout rate: 0.75 (>0.5). In TensorFlow 2.x, dropout() uses dropout rate instead of keep_prob. Please ensure that this is intended.
+2020-07-28 13:22:22.277335: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-07-28 13:22:24.070547: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2394310000 Hz
+2020-07-28 13:22:24.236339: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x4549530 executing computations on platform Host. Devices:
+2020-07-28 13:22:24.236421: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): <undefined>, <undefined>
+2020-07-28 13:22:25.262219: W tensorflow/compiler/jit/mark_for_compilation_pass.cc:1412] (One-time warning): Not using XLA:CPU for cluster because envvar TF_XLA_FLAGS=--tf_xla_cpu_global_jit was not set.  If you want XLA:CPU, either set that envvar, or use experimental_jit_scope to enable XLA:CPU.  To confirm that XLA is active, pass --vmodule=xla_compilation_cache=1 (as a proper command-line flag, not via TF_XLA_FLAGS) or set the envvar XLA_FLAGS=--xla_hlo_profile.
+2020-07-28 13:22:27.722361: W tensorflow/core/framework/allocator.cc:107] Allocation of 151142400 exceeds 10% of system memory.
+2020-07-28 13:22:29.582116: W tensorflow/core/framework/allocator.cc:107] Allocation of 151142400 exceeds 10% of system memory.
+2020-07-28 13:22:29.815016: W tensorflow/core/framework/allocator.cc:107] Allocation of 151142400 exceeds 10% of system memory.
+2020-07-28 13:22:30.058130: W tensorflow/core/framework/allocator.cc:107] Allocation of 151142400 exceeds 10% of system memory.
+2020-07-28 13:22:30.270465: W tensorflow/core/framework/allocator.cc:107] Allocation of 151142400 exceeds 10% of system memory.
+WARNING:tensorflow:From /home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/ops/init_ops.py:1251: calling VarianceScaling.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Call initializer instance with the dtype argument instead of passing it to the constructor
+WARNING:tensorflow:Large dropout rate: 0.75 (>0.5). In TensorFlow 2.x, dropout() uses dropout rate instead of keep_prob. Please ensure that this is intended.
+2020-07-28 13:55:17.552533: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-07-28 13:55:20.778483: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2394310000 Hz
+2020-07-28 13:55:20.997041: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x452abf0 executing computations on platform Host. Devices:
+2020-07-28 13:55:20.997084: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): <undefined>, <undefined>
+2020-07-28 13:55:21.844066: W tensorflow/compiler/jit/mark_for_compilation_pass.cc:1412] (One-time warning): Not using XLA:CPU for cluster because envvar TF_XLA_FLAGS=--tf_xla_cpu_global_jit was not set.  If you want XLA:CPU, either set that envvar, or use experimental_jit_scope to enable XLA:CPU.  To confirm that XLA is active, pass --vmodule=xla_compilation_cache=1 (as a proper command-line flag, not via TF_XLA_FLAGS) or set the envvar XLA_FLAGS=--xla_hlo_profile.
+2020-07-28 13:55:24.117442: W tensorflow/core/framework/allocator.cc:107] Allocation of 151142400 exceeds 10% of system memory.
+2020-07-28 13:55:27.914237: W tensorflow/core/framework/allocator.cc:107] Allocation of 151142400 exceeds 10% of system memory.
+2020-07-28 13:55:28.178439: W tensorflow/core/framework/allocator.cc:107] Allocation of 151142400 exceeds 10% of system memory.
+2020-07-28 13:55:28.435884: W tensorflow/core/framework/allocator.cc:107] Allocation of 151142400 exceeds 10% of system memory.
+2020-07-28 13:55:28.696331: W tensorflow/core/framework/allocator.cc:107] Allocation of 151142400 exceeds 10% of system memory.
+WARNING:tensorflow:From /home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/ops/init_ops.py:1251: calling VarianceScaling.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Call initializer instance with the dtype argument instead of passing it to the constructor
+WARNING:tensorflow:Large dropout rate: 0.75 (>0.5). In TensorFlow 2.x, dropout() uses dropout rate instead of keep_prob. Please ensure that this is intended.
+2020-07-28 14:29:54.638472: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-07-28 14:29:55.214308: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2394310000 Hz
+2020-07-28 14:29:55.249062: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x4c6ae90 executing computations on platform Host. Devices:
+2020-07-28 14:29:55.249113: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): <undefined>, <undefined>
+2020-07-28 14:29:55.830508: W tensorflow/compiler/jit/mark_for_compilation_pass.cc:1412] (One-time warning): Not using XLA:CPU for cluster because envvar TF_XLA_FLAGS=--tf_xla_cpu_global_jit was not set.  If you want XLA:CPU, either set that envvar, or use experimental_jit_scope to enable XLA:CPU.  To confirm that XLA is active, pass --vmodule=xla_compilation_cache=1 (as a proper command-line flag, not via TF_XLA_FLAGS) or set the envvar XLA_FLAGS=--xla_hlo_profile.
+2020-07-28 14:29:56.742139: W tensorflow/core/framework/allocator.cc:107] Allocation of 151142400 exceeds 10% of system memory.
+2020-07-28 14:29:58.601440: W tensorflow/core/framework/allocator.cc:107] Allocation of 151142400 exceeds 10% of system memory.
+2020-07-28 14:29:58.825563: W tensorflow/core/framework/allocator.cc:107] Allocation of 151142400 exceeds 10% of system memory.
+2020-07-28 14:29:59.050319: W tensorflow/core/framework/allocator.cc:107] Allocation of 151142400 exceeds 10% of system memory.
+2020-07-28 14:29:59.264154: W tensorflow/core/framework/allocator.cc:107] Allocation of 151142400 exceeds 10% of system memory.
+WARNING:tensorflow:From /home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/ops/init_ops.py:1251: calling VarianceScaling.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Call initializer instance with the dtype argument instead of passing it to the constructor
+WARNING:tensorflow:Large dropout rate: 0.75 (>0.5). In TensorFlow 2.x, dropout() uses dropout rate instead of keep_prob. Please ensure that this is intended.
+2020-07-28 15:05:01.495286: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-07-28 15:05:05.414396: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2394310000 Hz
+2020-07-28 15:05:05.460140: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x4a51f80 executing computations on platform Host. Devices:
+2020-07-28 15:05:05.460185: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): <undefined>, <undefined>
+2020-07-28 15:05:07.557803: W tensorflow/compiler/jit/mark_for_compilation_pass.cc:1412] (One-time warning): Not using XLA:CPU for cluster because envvar TF_XLA_FLAGS=--tf_xla_cpu_global_jit was not set.  If you want XLA:CPU, either set that envvar, or use experimental_jit_scope to enable XLA:CPU.  To confirm that XLA is active, pass --vmodule=xla_compilation_cache=1 (as a proper command-line flag, not via TF_XLA_FLAGS) or set the envvar XLA_FLAGS=--xla_hlo_profile.
+2020-07-28 15:05:11.890421: W tensorflow/core/framework/allocator.cc:107] Allocation of 151142400 exceeds 10% of system memory.
+2020-07-28 15:05:14.092956: W tensorflow/core/framework/allocator.cc:107] Allocation of 151142400 exceeds 10% of system memory.
+2020-07-28 15:05:14.312260: W tensorflow/core/framework/allocator.cc:107] Allocation of 151142400 exceeds 10% of system memory.
+2020-07-28 15:05:14.547430: W tensorflow/core/framework/allocator.cc:107] Allocation of 151142400 exceeds 10% of system memory.
+2020-07-28 15:05:14.770893: W tensorflow/core/framework/allocator.cc:107] Allocation of 151142400 exceeds 10% of system memory.
