@@ -1,0 +1,28 @@
+WARNING:tensorflow:From /home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/ops/init_ops.py:1251: calling VarianceScaling.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Call initializer instance with the dtype argument instead of passing it to the constructor
+WARNING:tensorflow:Large dropout rate: 0.85 (>0.5). In TensorFlow 2.x, dropout() uses dropout rate instead of keep_prob. Please ensure that this is intended.
+2020-10-29 01:52:14.041726: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-10-29 01:52:14.062824: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2394470000 Hz
+2020-10-29 01:52:14.063127: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x3ed1ee0 executing computations on platform Host. Devices:
+2020-10-29 01:52:14.063154: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): <undefined>, <undefined>
+2020-10-29 01:52:14.246177: W tensorflow/compiler/jit/mark_for_compilation_pass.cc:1412] (One-time warning): Not using XLA:CPU for cluster because envvar TF_XLA_FLAGS=--tf_xla_cpu_global_jit was not set.  If you want XLA:CPU, either set that envvar, or use experimental_jit_scope to enable XLA:CPU.  To confirm that XLA is active, pass --vmodule=xla_compilation_cache=1 (as a proper command-line flag, not via TF_XLA_FLAGS) or set the envvar XLA_FLAGS=--xla_hlo_profile.
+2020-10-29 01:52:14.620473: W tensorflow/core/framework/allocator.cc:107] Allocation of 50380800 exceeds 10% of system memory.
+2020-10-29 01:52:14.909441: W tensorflow/core/framework/allocator.cc:107] Allocation of 50380800 exceeds 10% of system memory.
+2020-10-29 01:52:15.242083: W tensorflow/core/framework/allocator.cc:107] Allocation of 50380800 exceeds 10% of system memory.
+2020-10-29 01:52:15.419185: W tensorflow/core/framework/allocator.cc:107] Allocation of 50380800 exceeds 10% of system memory.
+2020-10-29 01:52:15.584192: W tensorflow/core/framework/allocator.cc:107] Allocation of 50380800 exceeds 10% of system memory.
+Traceback (most recent call last):
+  File "./main.py", line 256, in <module>
+    epochs=400)
+  File "./main.py", line 231, in main
+    batch_size=batch_size, verbose=modelVerbose)
+  File "/home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/keras/engine/training.py", line 780, in fit
+    steps_name='steps_per_epoch')
+  File "/home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/keras/engine/training_arrays.py", line 363, in model_iteration
+    batch_outs = f(ins_batch)
+  File "/home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/keras/backend.py", line 3292, in __call__
+    run_metadata=self.run_metadata)
+  File "/home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/client/session.py", line 1458, in __call__
+    run_metadata_ptr)
+KeyboardInterrupt

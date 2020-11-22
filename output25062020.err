@@ -1,0 +1,672 @@
+WARNING:tensorflow:From /home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/ops/init_ops.py:1251: calling VarianceScaling.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Call initializer instance with the dtype argument instead of passing it to the constructor
+2020-06-25 22:03:56.437590: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-06-25 22:03:56.980321: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2394315000 Hz
+2020-06-25 22:03:57.014974: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x4376120 executing computations on platform Host. Devices:
+2020-06-25 22:03:57.015031: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): <undefined>, <undefined>
+2020-06-25 22:03:57.496509: W tensorflow/compiler/jit/mark_for_compilation_pass.cc:1412] (One-time warning): Not using XLA:CPU for cluster because envvar TF_XLA_FLAGS=--tf_xla_cpu_global_jit was not set.  If you want XLA:CPU, either set that envvar, or use experimental_jit_scope to enable XLA:CPU.  To confirm that XLA is active, pass --vmodule=xla_compilation_cache=1 (as a proper command-line flag, not via TF_XLA_FLAGS) or set the envvar XLA_FLAGS=--xla_hlo_profile.
+2020-06-25 22:03:58.507993: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-25 22:03:59.692103: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-25 22:04:00.137314: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-25 22:04:00.561872: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-25 22:04:00.912411: W tensorflow/core/framework/allocator.cc:107] Allocation of 139334400 exceeds 10% of system memory.
+WARNING:tensorflow:From /home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/ops/init_ops.py:1251: calling VarianceScaling.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Call initializer instance with the dtype argument instead of passing it to the constructor
+2020-06-25 22:40:37.887321: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-06-25 22:40:38.420226: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2394315000 Hz
+2020-06-25 22:40:38.442548: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x4cf79d0 executing computations on platform Host. Devices:
+2020-06-25 22:40:38.442592: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): <undefined>, <undefined>
+2020-06-25 22:40:38.913015: W tensorflow/compiler/jit/mark_for_compilation_pass.cc:1412] (One-time warning): Not using XLA:CPU for cluster because envvar TF_XLA_FLAGS=--tf_xla_cpu_global_jit was not set.  If you want XLA:CPU, either set that envvar, or use experimental_jit_scope to enable XLA:CPU.  To confirm that XLA is active, pass --vmodule=xla_compilation_cache=1 (as a proper command-line flag, not via TF_XLA_FLAGS) or set the envvar XLA_FLAGS=--xla_hlo_profile.
+2020-06-25 22:40:39.835934: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-25 22:40:40.975532: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-25 22:40:41.388274: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-25 22:40:41.801246: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-25 22:40:42.196341: W tensorflow/core/framework/allocator.cc:107] Allocation of 139334400 exceeds 10% of system memory.
+WARNING:tensorflow:From /home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/ops/init_ops.py:1251: calling VarianceScaling.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Call initializer instance with the dtype argument instead of passing it to the constructor
+2020-06-25 23:17:39.910594: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-06-25 23:17:41.352335: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2394315000 Hz
+2020-06-25 23:17:41.352665: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x545dcd0 executing computations on platform Host. Devices:
+2020-06-25 23:17:41.352696: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): <undefined>, <undefined>
+2020-06-25 23:17:41.828811: W tensorflow/compiler/jit/mark_for_compilation_pass.cc:1412] (One-time warning): Not using XLA:CPU for cluster because envvar TF_XLA_FLAGS=--tf_xla_cpu_global_jit was not set.  If you want XLA:CPU, either set that envvar, or use experimental_jit_scope to enable XLA:CPU.  To confirm that XLA is active, pass --vmodule=xla_compilation_cache=1 (as a proper command-line flag, not via TF_XLA_FLAGS) or set the envvar XLA_FLAGS=--xla_hlo_profile.
+2020-06-25 23:17:42.977769: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-25 23:17:44.139595: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-25 23:17:44.577243: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-25 23:17:45.002024: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-25 23:17:45.355637: W tensorflow/core/framework/allocator.cc:107] Allocation of 139334400 exceeds 10% of system memory.
+WARNING:tensorflow:From /home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/ops/init_ops.py:1251: calling VarianceScaling.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Call initializer instance with the dtype argument instead of passing it to the constructor
+2020-06-25 23:54:06.424242: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-06-25 23:54:08.628306: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2394315000 Hz
+2020-06-25 23:54:08.688298: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x3e6f8b0 executing computations on platform Host. Devices:
+2020-06-25 23:54:08.688345: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): <undefined>, <undefined>
+2020-06-25 23:54:09.614219: W tensorflow/compiler/jit/mark_for_compilation_pass.cc:1412] (One-time warning): Not using XLA:CPU for cluster because envvar TF_XLA_FLAGS=--tf_xla_cpu_global_jit was not set.  If you want XLA:CPU, either set that envvar, or use experimental_jit_scope to enable XLA:CPU.  To confirm that XLA is active, pass --vmodule=xla_compilation_cache=1 (as a proper command-line flag, not via TF_XLA_FLAGS) or set the envvar XLA_FLAGS=--xla_hlo_profile.
+2020-06-25 23:54:10.823522: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-25 23:54:12.107353: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-25 23:54:12.527466: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-25 23:54:12.939436: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-25 23:54:13.556039: W tensorflow/core/framework/allocator.cc:107] Allocation of 158227200 exceeds 10% of system memory.
+WARNING:tensorflow:From /home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/ops/init_ops.py:1251: calling VarianceScaling.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Call initializer instance with the dtype argument instead of passing it to the constructor
+2020-06-26 00:30:43.038067: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-06-26 00:30:43.612329: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2394315000 Hz
+2020-06-26 00:30:43.681856: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x3f82f80 executing computations on platform Host. Devices:
+2020-06-26 00:30:43.681902: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): <undefined>, <undefined>
+2020-06-26 00:30:44.174435: W tensorflow/compiler/jit/mark_for_compilation_pass.cc:1412] (One-time warning): Not using XLA:CPU for cluster because envvar TF_XLA_FLAGS=--tf_xla_cpu_global_jit was not set.  If you want XLA:CPU, either set that envvar, or use experimental_jit_scope to enable XLA:CPU.  To confirm that XLA is active, pass --vmodule=xla_compilation_cache=1 (as a proper command-line flag, not via TF_XLA_FLAGS) or set the envvar XLA_FLAGS=--xla_hlo_profile.
+2020-06-26 00:30:45.064132: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 00:30:46.225807: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 00:30:46.659322: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 00:30:47.076900: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 00:30:47.707466: W tensorflow/core/framework/allocator.cc:107] Allocation of 158227200 exceeds 10% of system memory.
+WARNING:tensorflow:From /home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/ops/init_ops.py:1251: calling VarianceScaling.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Call initializer instance with the dtype argument instead of passing it to the constructor
+2020-06-26 01:07:08.595002: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-06-26 01:07:08.988336: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2394315000 Hz
+2020-06-26 01:07:09.002393: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x428ac20 executing computations on platform Host. Devices:
+2020-06-26 01:07:09.002445: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): <undefined>, <undefined>
+2020-06-26 01:07:09.341448: W tensorflow/compiler/jit/mark_for_compilation_pass.cc:1412] (One-time warning): Not using XLA:CPU for cluster because envvar TF_XLA_FLAGS=--tf_xla_cpu_global_jit was not set.  If you want XLA:CPU, either set that envvar, or use experimental_jit_scope to enable XLA:CPU.  To confirm that XLA is active, pass --vmodule=xla_compilation_cache=1 (as a proper command-line flag, not via TF_XLA_FLAGS) or set the envvar XLA_FLAGS=--xla_hlo_profile.
+2020-06-26 01:07:10.192783: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 01:07:11.321173: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 01:07:11.729214: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 01:07:12.142171: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 01:07:12.505021: W tensorflow/core/framework/allocator.cc:107] Allocation of 139334400 exceeds 10% of system memory.
+WARNING:tensorflow:From /home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/ops/init_ops.py:1251: calling VarianceScaling.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Call initializer instance with the dtype argument instead of passing it to the constructor
+2020-06-26 01:43:41.370870: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-06-26 01:43:42.464313: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2394315000 Hz
+2020-06-26 01:43:42.464630: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x49c98e0 executing computations on platform Host. Devices:
+2020-06-26 01:43:42.464654: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): <undefined>, <undefined>
+2020-06-26 01:43:43.440489: W tensorflow/compiler/jit/mark_for_compilation_pass.cc:1412] (One-time warning): Not using XLA:CPU for cluster because envvar TF_XLA_FLAGS=--tf_xla_cpu_global_jit was not set.  If you want XLA:CPU, either set that envvar, or use experimental_jit_scope to enable XLA:CPU.  To confirm that XLA is active, pass --vmodule=xla_compilation_cache=1 (as a proper command-line flag, not via TF_XLA_FLAGS) or set the envvar XLA_FLAGS=--xla_hlo_profile.
+2020-06-26 01:43:45.166347: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 01:43:46.327892: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 01:43:46.743362: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 01:43:47.155167: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 01:43:47.776292: W tensorflow/core/framework/allocator.cc:107] Allocation of 158227200 exceeds 10% of system memory.
+WARNING:tensorflow:From /home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/ops/init_ops.py:1251: calling VarianceScaling.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Call initializer instance with the dtype argument instead of passing it to the constructor
+2020-06-26 02:20:05.057883: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-06-26 02:20:07.100314: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2394315000 Hz
+2020-06-26 02:20:07.100582: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x3898f70 executing computations on platform Host. Devices:
+2020-06-26 02:20:07.100609: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): <undefined>, <undefined>
+2020-06-26 02:20:07.809455: W tensorflow/compiler/jit/mark_for_compilation_pass.cc:1412] (One-time warning): Not using XLA:CPU for cluster because envvar TF_XLA_FLAGS=--tf_xla_cpu_global_jit was not set.  If you want XLA:CPU, either set that envvar, or use experimental_jit_scope to enable XLA:CPU.  To confirm that XLA is active, pass --vmodule=xla_compilation_cache=1 (as a proper command-line flag, not via TF_XLA_FLAGS) or set the envvar XLA_FLAGS=--xla_hlo_profile.
+2020-06-26 02:20:09.037142: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 02:20:10.309830: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 02:20:10.743804: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 02:20:11.165656: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 02:20:11.804490: W tensorflow/core/framework/allocator.cc:107] Allocation of 158227200 exceeds 10% of system memory.
+WARNING:tensorflow:From /home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/ops/init_ops.py:1251: calling VarianceScaling.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Call initializer instance with the dtype argument instead of passing it to the constructor
+2020-06-26 02:56:39.759342: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-06-26 02:56:40.192328: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2394315000 Hz
+2020-06-26 02:56:40.192643: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x3d38e40 executing computations on platform Host. Devices:
+2020-06-26 02:56:40.192672: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): <undefined>, <undefined>
+2020-06-26 02:56:40.601580: W tensorflow/compiler/jit/mark_for_compilation_pass.cc:1412] (One-time warning): Not using XLA:CPU for cluster because envvar TF_XLA_FLAGS=--tf_xla_cpu_global_jit was not set.  If you want XLA:CPU, either set that envvar, or use experimental_jit_scope to enable XLA:CPU.  To confirm that XLA is active, pass --vmodule=xla_compilation_cache=1 (as a proper command-line flag, not via TF_XLA_FLAGS) or set the envvar XLA_FLAGS=--xla_hlo_profile.
+2020-06-26 02:56:41.540223: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 02:56:42.790793: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 02:56:43.202312: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 02:56:43.613912: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 02:56:44.246897: W tensorflow/core/framework/allocator.cc:107] Allocation of 158227200 exceeds 10% of system memory.
+WARNING:tensorflow:From /home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/ops/init_ops.py:1251: calling VarianceScaling.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Call initializer instance with the dtype argument instead of passing it to the constructor
+2020-06-26 03:33:09.980247: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-06-26 03:33:10.292328: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2394315000 Hz
+2020-06-26 03:33:10.292649: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x442b260 executing computations on platform Host. Devices:
+2020-06-26 03:33:10.292674: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): <undefined>, <undefined>
+2020-06-26 03:33:10.615153: W tensorflow/compiler/jit/mark_for_compilation_pass.cc:1412] (One-time warning): Not using XLA:CPU for cluster because envvar TF_XLA_FLAGS=--tf_xla_cpu_global_jit was not set.  If you want XLA:CPU, either set that envvar, or use experimental_jit_scope to enable XLA:CPU.  To confirm that XLA is active, pass --vmodule=xla_compilation_cache=1 (as a proper command-line flag, not via TF_XLA_FLAGS) or set the envvar XLA_FLAGS=--xla_hlo_profile.
+2020-06-26 03:33:11.275332: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 03:33:11.872911: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 03:33:12.290715: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 03:33:12.706547: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 03:33:13.064668: W tensorflow/core/framework/allocator.cc:107] Allocation of 139334400 exceeds 10% of system memory.
+WARNING:tensorflow:From /home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/ops/init_ops.py:1251: calling VarianceScaling.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Call initializer instance with the dtype argument instead of passing it to the constructor
+2020-06-26 04:09:25.356322: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-06-26 04:09:25.712325: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2394315000 Hz
+2020-06-26 04:09:25.712611: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x3bc7f80 executing computations on platform Host. Devices:
+2020-06-26 04:09:25.712635: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): <undefined>, <undefined>
+2020-06-26 04:09:26.062710: W tensorflow/compiler/jit/mark_for_compilation_pass.cc:1412] (One-time warning): Not using XLA:CPU for cluster because envvar TF_XLA_FLAGS=--tf_xla_cpu_global_jit was not set.  If you want XLA:CPU, either set that envvar, or use experimental_jit_scope to enable XLA:CPU.  To confirm that XLA is active, pass --vmodule=xla_compilation_cache=1 (as a proper command-line flag, not via TF_XLA_FLAGS) or set the envvar XLA_FLAGS=--xla_hlo_profile.
+2020-06-26 04:09:26.974727: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 04:09:28.214234: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 04:09:28.626844: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 04:09:29.057031: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 04:09:29.673456: W tensorflow/core/framework/allocator.cc:107] Allocation of 158227200 exceeds 10% of system memory.
+WARNING:tensorflow:From /home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/ops/init_ops.py:1251: calling VarianceScaling.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Call initializer instance with the dtype argument instead of passing it to the constructor
+2020-06-26 04:45:51.894822: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-06-26 04:45:53.048323: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2394315000 Hz
+2020-06-26 04:45:53.048619: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x3aa8fd0 executing computations on platform Host. Devices:
+2020-06-26 04:45:53.048650: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): <undefined>, <undefined>
+2020-06-26 04:45:53.827913: W tensorflow/compiler/jit/mark_for_compilation_pass.cc:1412] (One-time warning): Not using XLA:CPU for cluster because envvar TF_XLA_FLAGS=--tf_xla_cpu_global_jit was not set.  If you want XLA:CPU, either set that envvar, or use experimental_jit_scope to enable XLA:CPU.  To confirm that XLA is active, pass --vmodule=xla_compilation_cache=1 (as a proper command-line flag, not via TF_XLA_FLAGS) or set the envvar XLA_FLAGS=--xla_hlo_profile.
+2020-06-26 04:45:55.625532: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 04:45:57.119452: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 04:45:57.527076: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 04:45:57.952944: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 04:45:58.310952: W tensorflow/core/framework/allocator.cc:107] Allocation of 139334400 exceeds 10% of system memory.
+WARNING:tensorflow:From /home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/ops/init_ops.py:1251: calling VarianceScaling.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Call initializer instance with the dtype argument instead of passing it to the constructor
+2020-06-26 05:22:06.317808: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-06-26 05:22:06.600330: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2394315000 Hz
+2020-06-26 05:22:06.600609: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x5128620 executing computations on platform Host. Devices:
+2020-06-26 05:22:06.600633: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): <undefined>, <undefined>
+2020-06-26 05:22:07.085672: W tensorflow/compiler/jit/mark_for_compilation_pass.cc:1412] (One-time warning): Not using XLA:CPU for cluster because envvar TF_XLA_FLAGS=--tf_xla_cpu_global_jit was not set.  If you want XLA:CPU, either set that envvar, or use experimental_jit_scope to enable XLA:CPU.  To confirm that XLA is active, pass --vmodule=xla_compilation_cache=1 (as a proper command-line flag, not via TF_XLA_FLAGS) or set the envvar XLA_FLAGS=--xla_hlo_profile.
+2020-06-26 05:22:07.903853: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 05:22:09.298483: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 05:22:09.727067: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 05:22:10.246697: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 05:22:10.610723: W tensorflow/core/framework/allocator.cc:107] Allocation of 139334400 exceeds 10% of system memory.
+WARNING:tensorflow:From /home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/ops/init_ops.py:1251: calling VarianceScaling.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Call initializer instance with the dtype argument instead of passing it to the constructor
+2020-06-26 05:58:47.529823: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-06-26 05:58:48.368325: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2394315000 Hz
+2020-06-26 05:58:48.368650: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x4e774e0 executing computations on platform Host. Devices:
+2020-06-26 05:58:48.368681: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): <undefined>, <undefined>
+2020-06-26 05:58:48.976192: W tensorflow/compiler/jit/mark_for_compilation_pass.cc:1412] (One-time warning): Not using XLA:CPU for cluster because envvar TF_XLA_FLAGS=--tf_xla_cpu_global_jit was not set.  If you want XLA:CPU, either set that envvar, or use experimental_jit_scope to enable XLA:CPU.  To confirm that XLA is active, pass --vmodule=xla_compilation_cache=1 (as a proper command-line flag, not via TF_XLA_FLAGS) or set the envvar XLA_FLAGS=--xla_hlo_profile.
+2020-06-26 05:58:50.729514: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 05:58:51.736431: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 05:58:52.143592: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 05:58:52.562676: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 05:58:52.941675: W tensorflow/core/framework/allocator.cc:107] Allocation of 139334400 exceeds 10% of system memory.
+WARNING:tensorflow:From /home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/ops/init_ops.py:1251: calling VarianceScaling.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Call initializer instance with the dtype argument instead of passing it to the constructor
+2020-06-26 06:35:54.404740: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-06-26 06:35:54.760331: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2394315000 Hz
+2020-06-26 06:35:54.760598: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x3f06e10 executing computations on platform Host. Devices:
+2020-06-26 06:35:54.760618: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): <undefined>, <undefined>
+2020-06-26 06:35:55.102704: W tensorflow/compiler/jit/mark_for_compilation_pass.cc:1412] (One-time warning): Not using XLA:CPU for cluster because envvar TF_XLA_FLAGS=--tf_xla_cpu_global_jit was not set.  If you want XLA:CPU, either set that envvar, or use experimental_jit_scope to enable XLA:CPU.  To confirm that XLA is active, pass --vmodule=xla_compilation_cache=1 (as a proper command-line flag, not via TF_XLA_FLAGS) or set the envvar XLA_FLAGS=--xla_hlo_profile.
+2020-06-26 06:35:56.662732: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 06:35:57.846907: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 06:35:58.276141: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 06:35:58.695736: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 06:35:59.052228: W tensorflow/core/framework/allocator.cc:107] Allocation of 139334400 exceeds 10% of system memory.
+WARNING:tensorflow:From /home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/ops/init_ops.py:1251: calling VarianceScaling.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Call initializer instance with the dtype argument instead of passing it to the constructor
+2020-06-26 07:12:25.668066: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-06-26 07:12:25.988338: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2394315000 Hz
+2020-06-26 07:12:25.994457: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x465a9a0 executing computations on platform Host. Devices:
+2020-06-26 07:12:25.994502: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): <undefined>, <undefined>
+2020-06-26 07:12:26.306018: W tensorflow/compiler/jit/mark_for_compilation_pass.cc:1412] (One-time warning): Not using XLA:CPU for cluster because envvar TF_XLA_FLAGS=--tf_xla_cpu_global_jit was not set.  If you want XLA:CPU, either set that envvar, or use experimental_jit_scope to enable XLA:CPU.  To confirm that XLA is active, pass --vmodule=xla_compilation_cache=1 (as a proper command-line flag, not via TF_XLA_FLAGS) or set the envvar XLA_FLAGS=--xla_hlo_profile.
+2020-06-26 07:12:27.284432: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 07:12:28.479351: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 07:12:28.901457: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 07:12:29.313426: W tensorflow/core/framework/allocator.cc:107] Allocation of 302284800 exceeds 10% of system memory.
+2020-06-26 07:12:29.669688: W tensorflow/core/framework/allocator.cc:107] Allocation of 139334400 exceeds 10% of system memory.
+WARNING:tensorflow:From /home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/ops/init_ops.py:1251: calling VarianceScaling.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Call initializer instance with the dtype argument instead of passing it to the constructor
+Traceback (most recent call last):
+  File "./main.py", line 254, in <module>
+    epochs=1000)
+  File "./main.py", line 214, in main
+    (trainingSet, avaliatiSet, avaliati) = prepareBatches(sample.dictOfOutputs)
+  File "./main.py", line 136, in prepareBatches
+    trainingSet = getBatch(training, dictOfOutputs)
+  File "./main.py", line 46, in getBatch
+    D = pickle.load(pickledFile)
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "./main.py", line 11, in <module>
+    import tensorflow as tf
+  File "/home/bruno/.local/lib/python3.6/site-packages/tensorflow/__init__.py", line 28, in <module>
+    from tensorflow.python import pywrap_tensorflow  # pylint: disable=unused-import
+  File "/home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/__init__.py", line 52, in <module>
+    from tensorflow.core.framework.graph_pb2 import *
+  File "/home/bruno/.local/lib/python3.6/site-packages/tensorflow/core/framework/graph_pb2.py", line 9, in <module>
+    from google.protobuf import reflection as _reflection
+  File "/home/bruno/.local/lib/python3.6/site-packages/google/protobuf/reflection.py", line 51, in <module>
+    from google.protobuf import message_factory
+  File "/home/bruno/.local/lib/python3.6/site-packages/google/protobuf/message_factory.py", line 43, in <module>
+    from google.protobuf import descriptor_pool
+  File "/home/bruno/.local/lib/python3.6/site-packages/google/protobuf/descriptor_pool.py", line 65, in <module>
+    from google.protobuf import text_encoding
+  File "/home/bruno/.local/lib/python3.6/site-packages/google/protobuf/text_encoding.py", line 88, in <module>
+    _CUNESCAPE_HEX = re.compile(r'(\\+)x([0-9a-fA-F])(?![0-9a-fA-F])')
+  File "/usr/lib/python3.6/re.py", line 233, in compile
+    return _compile(pattern, flags)
+  File "/usr/lib/python3.6/re.py", line 302, in _compile
+    if not (flags & DEBUG):
+  File "/usr/lib/python3.6/enum.py", line 806, in __and__
+    return self.__class__(self._value_ & self.__class__(other)._value_)
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "./main.py", line 7, in <module>
+    import random
+  File "/usr/lib/python3.6/random.py", line 46, in <module>
+    from hashlib import sha512 as _sha512
+  File "/usr/lib/python3.6/hashlib.py", line 160, in <module>
+    import _hashlib
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "./main.py", line 11, in <module>
+    import tensorflow as tf
+  File "/home/bruno/.local/lib/python3.6/site-packages/tensorflow/__init__.py", line 28, in <module>
+    from tensorflow.python import pywrap_tensorflow  # pylint: disable=unused-import
+  File "/home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/__init__.py", line 47, in <module>
+    import numpy as np
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/__init__.py", line 145, in <module>
+    from . import lib
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/lib/__init__.py", line 27, in <module>
+    from .index_tricks import *
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/lib/index_tricks.py", line 14, in <module>
+    from .function_base import diff
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/lib/function_base.py", line 2247, in <module>
+    aweights=None):
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/core/overrides.py", line 181, in decorator
+    source, filename='<__array_function__ internals>', mode='exec')
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "./main.py", line 11, in <module>
+    import tensorflow as tf
+  File "/home/bruno/.local/lib/python3.6/site-packages/tensorflow/__init__.py", line 28, in <module>
+    from tensorflow.python import pywrap_tensorflow  # pylint: disable=unused-import
+  File "/home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/__init__.py", line 47, in <module>
+    import numpy as np
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/__init__.py", line 142, in <module>
+    from . import core
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/core/__init__.py", line 104, in <module>
+    from . import _add_newdocs
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/core/_add_newdocs.py", line 6795, in <module>
+    """)
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "./main.py", line 11, in <module>
+    import tensorflow as tf
+  File "/home/bruno/.local/lib/python3.6/site-packages/tensorflow/__init__.py", line 28, in <module>
+    from tensorflow.python import pywrap_tensorflow  # pylint: disable=unused-import
+  File "/home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/__init__.py", line 47, in <module>
+    import numpy as np
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/__init__.py", line 142, in <module>
+    from . import core
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/core/__init__.py", line 107, in <module>
+    from . import _internal
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/core/_internal.py", line 11, in <module>
+    import platform
+  File "/usr/lib/python3.6/platform.py", line 1155, in <module>
+    r' on (.NET [\d\.]+)', re.ASCII)
+  File "/usr/lib/python3.6/re.py", line 233, in compile
+    return _compile(pattern, flags)
+  File "/usr/lib/python3.6/re.py", line 301, in _compile
+    p = sre_compile.compile(pattern, flags)
+  File "/usr/lib/python3.6/sre_compile.py", line 562, in compile
+    p = sre_parse.parse(p, flags)
+  File "/usr/lib/python3.6/sre_parse.py", line 855, in parse
+    p = _parse_sub(source, pattern, flags & SRE_FLAG_VERBOSE, 0)
+  File "/usr/lib/python3.6/sre_parse.py", line 416, in _parse_sub
+    not nested and not items))
+  File "/usr/lib/python3.6/sre_parse.py", line 765, in _parse
+    p = _parse_sub(source, state, sub_verbose, nested + 1)
+  File "/usr/lib/python3.6/sre_parse.py", line 420, in _parse_sub
+    if len(items) == 1:
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "./main.py", line 11, in <module>
+    import tensorflow as tf
+  File "/home/bruno/.local/lib/python3.6/site-packages/tensorflow/__init__.py", line 28, in <module>
+    from tensorflow.python import pywrap_tensorflow  # pylint: disable=unused-import
+  File "/home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/__init__.py", line 47, in <module>
+    import numpy as np
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/__init__.py", line 145, in <module>
+    from . import lib
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/lib/__init__.py", line 27, in <module>
+    from .index_tricks import *
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/lib/index_tricks.py", line 738, in <module>
+    s_ = IndexExpression(maketuple=False)
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/lib/index_tricks.py", line 728, in __init__
+    def __init__(self, maketuple):
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "./main.py", line 11, in <module>
+    import tensorflow as tf
+  File "/home/bruno/.local/lib/python3.6/site-packages/tensorflow/__init__.py", line 28, in <module>
+    from tensorflow.python import pywrap_tensorflow  # pylint: disable=unused-import
+  File "/home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/__init__.py", line 47, in <module>
+    import numpy as np
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/__init__.py", line 145, in <module>
+    from . import lib
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/lib/__init__.py", line 36, in <module>
+    from .polynomial import *
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/lib/polynomial.py", line 806, in <module>
+    @array_function_dispatch(_binary_op_dispatcher)
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/core/overrides.py", line 181, in decorator
+    source, filename='<__array_function__ internals>', mode='exec')
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "./main.py", line 11, in <module>
+    import tensorflow as tf
+  File "/home/bruno/.local/lib/python3.6/site-packages/tensorflow/__init__.py", line 28, in <module>
+    from tensorflow.python import pywrap_tensorflow  # pylint: disable=unused-import
+  File "/home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/__init__.py", line 47, in <module>
+    import numpy as np
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/__init__.py", line 145, in <module>
+    from . import lib
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/lib/__init__.py", line 27, in <module>
+    from .index_tricks import *
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/lib/index_tricks.py", line 18, in <module>
+    from numpy.lib.stride_tricks import as_strided
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/lib/stride_tricks.py", line 206, in <module>
+    @array_function_dispatch(_broadcast_arrays_dispatcher, module='numpy')
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/core/overrides.py", line 181, in decorator
+    source, filename='<__array_function__ internals>', mode='exec')
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "./main.py", line 11, in <module>
+    import tensorflow as tf
+  File "/home/bruno/.local/lib/python3.6/site-packages/tensorflow/__init__.py", line 28, in <module>
+    from tensorflow.python import pywrap_tensorflow  # pylint: disable=unused-import
+  File "/home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/__init__.py", line 47, in <module>
+    import numpy as np
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/__init__.py", line 145, in <module>
+    from . import lib
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/lib/__init__.py", line 27, in <module>
+    from .index_tricks import *
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/lib/index_tricks.py", line 14, in <module>
+    from .function_base import diff
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/lib/function_base.py", line 54, in <module>
+    from numpy.lib.histograms import histogram, histogramdd
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/lib/histograms.py", line 474, in <module>
+    def histogram_bin_edges(a, bins=10, range=None, weights=None):
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/core/overrides.py", line 168, in decorator
+    verify_matching_signatures(implementation, dispatcher)
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/core/overrides.py", line 75, in verify_matching_signatures
+    dispatcher_spec = ArgSpec(*getargspec(dispatcher))
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/compat/_inspect.py", line 112, in getargspec
+    args, varargs, varkw = getargs(func.__code__)
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/compat/_inspect.py", line 87, in getargs
+    if args[i][:1] in ['', '.']:
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "./main.py", line 11, in <module>
+    import tensorflow as tf
+  File "/home/bruno/.local/lib/python3.6/site-packages/tensorflow/__init__.py", line 28, in <module>
+    from tensorflow.python import pywrap_tensorflow  # pylint: disable=unused-import
+  File "/home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/__init__.py", line 47, in <module>
+    import numpy as np
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/__init__.py", line 145, in <module>
+    from . import lib
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/lib/__init__.py", line 27, in <module>
+    from .index_tricks import *
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/lib/index_tricks.py", line 13, in <module>
+    import numpy.matrixlib as matrixlib
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/matrixlib/__init__.py", line 6, in <module>
+    from .defmatrix import *
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/matrixlib/defmatrix.py", line 13, in <module>
+    from numpy.linalg import matrix_power
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/linalg/__init__.py", line 75, in <module>
+    from .linalg import *
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/linalg/linalg.py", line 34, in <module>
+    from numpy.lib.twodim_base import triu, eye
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/lib/twodim_base.py", line 476, in <module>
+    def vander(x, N=None, increasing=False):
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/core/overrides.py", line 181, in decorator
+    source, filename='<__array_function__ internals>', mode='exec')
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "./main.py", line 11, in <module>
+    import tensorflow as tf
+  File "/home/bruno/.local/lib/python3.6/site-packages/tensorflow/__init__.py", line 28, in <module>
+    from tensorflow.python import pywrap_tensorflow  # pylint: disable=unused-import
+  File "/home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/__init__.py", line 47, in <module>
+    import numpy as np
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/__init__.py", line 151, in <module>
+    from . import polynomial
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/polynomial/__init__.py", line 18, in <module>
+    from .polynomial import Polynomial
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/polynomial/polynomial.py", line 1442, in <module>
+    class Polynomial(ABCPolyBase):
+  File "/usr/lib/python3.6/abc.py", line 133, in __new__
+    cls = super().__new__(mcls, name, bases, namespace, **kwargs)
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "./main.py", line 11, in <module>
+    import tensorflow as tf
+  File "/home/bruno/.local/lib/python3.6/site-packages/tensorflow/__init__.py", line 28, in <module>
+    from tensorflow.python import pywrap_tensorflow  # pylint: disable=unused-import
+  File "/home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/__init__.py", line 47, in <module>
+    import numpy as np
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/__init__.py", line 142, in <module>
+    from . import core
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/core/__init__.py", line 78, in <module>
+    from . import numeric
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/core/numeric.py", line 29, in <module>
+    from . import shape_base
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/core/shape_base.py", line 14, in <module>
+    from . import fromnumeric as _from_nx
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/core/fromnumeric.py", line 18, in <module>
+    from . import _methods
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/core/_methods.py", line 14, in <module>
+    from numpy.core import _exceptions
+  File "<frozen importlib._bootstrap>", line 971, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 955, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 658, in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 577, in module_from_spec
+  File "<frozen importlib._bootstrap>", line 532, in _init_module_attrs
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "./main.py", line 11, in <module>
+    import tensorflow as tf
+  File "/home/bruno/.local/lib/python3.6/site-packages/tensorflow/__init__.py", line 28, in <module>
+    from tensorflow.python import pywrap_tensorflow  # pylint: disable=unused-import
+  File "/home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/__init__.py", line 47, in <module>
+    import numpy as np
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/__init__.py", line 145, in <module>
+    from . import lib
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/lib/__init__.py", line 38, in <module>
+    from .arraysetops import *
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/lib/arraysetops.py", line 485, in <module>
+    def in1d(ar1, ar2, assume_unique=False, invert=False):
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/core/overrides.py", line 181, in decorator
+    source, filename='<__array_function__ internals>', mode='exec')
+KeyboardInterrupt
+WARNING:tensorflow:From /home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/ops/init_ops.py:1251: calling VarianceScaling.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Call initializer instance with the dtype argument instead of passing it to the constructor
+Traceback (most recent call last):
+  File "./main.py", line 15, in <module>
+    from loadDataSets import leituraMesa, simulado3out, simulado10out, leitura1902, DatasetNdimentional
+  File "/media/bruno/77ddb526-6e16-4226-a528-8116b47018d6/home/bruno/largeDisk/Unicamp/IC/Vibration-analysis/loadDataSets.py", line 3, in <module>
+    import librosa
+  File "/home/bruno/.local/lib/python3.6/site-packages/librosa/__init__.py", line 12, in <module>
+    from . import core
+  File "/home/bruno/.local/lib/python3.6/site-packages/librosa/core/__init__.py", line 123, in <module>
+    from .time_frequency import *  # pylint: disable=wildcard-import
+  File "/home/bruno/.local/lib/python3.6/site-packages/librosa/core/time_frequency.py", line 11, in <module>
+    from ..util.exceptions import ParameterError
+  File "/home/bruno/.local/lib/python3.6/site-packages/librosa/util/__init__.py", line 77, in <module>
+    from .utils import *  # pylint: disable=wildcard-import
+  File "/home/bruno/.local/lib/python3.6/site-packages/librosa/util/utils.py", line 10, in <module>
+    import numba
+  File "/home/bruno/.local/lib/python3.6/site-packages/numba/__init__.py", line 18, in <module>
+    from .special import (
+  File "/home/bruno/.local/lib/python3.6/site-packages/numba/special.py", line 5, in <module>
+    from .typing.typeof import typeof
+  File "/home/bruno/.local/lib/python3.6/site-packages/numba/typing/__init__.py", line 2, in <module>
+    from .context import BaseContext, Context
+  File "/home/bruno/.local/lib/python3.6/site-packages/numba/typing/context.py", line 13, in <module>
+    from . import templates
+  File "/home/bruno/.local/lib/python3.6/site-packages/numba/typing/templates.py", line 22, in <module>
+    'func_ir typemap calltypes signature')
+  File "/usr/lib/python3.6/collections/__init__.py", line 429, in namedtuple
+    exec(class_definition, namespace)
+  File "<string>", line 1, in <module>
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "./main.py", line 11, in <module>
+    import tensorflow as tf
+  File "/home/bruno/.local/lib/python3.6/site-packages/tensorflow/__init__.py", line 28, in <module>
+    from tensorflow.python import pywrap_tensorflow  # pylint: disable=unused-import
+  File "/home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/__init__.py", line 63, in <module>
+    from tensorflow.python.framework.framework_lib import *  # pylint: disable=redefined-builtin
+  File "/home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/framework/framework_lib.py", line 52, in <module>
+    from tensorflow.python.framework.importer import import_graph_def
+  File "/home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/framework/importer.py", line 28, in <module>
+    from tensorflow.python.framework import function
+  File "/home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/framework/function.py", line 37, in <module>
+    from tensorflow.python.ops import resource_variable_ops
+  File "/home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/ops/resource_variable_ops.py", line 38, in <module>
+    from tensorflow.python.ops import gen_state_ops
+  File "<frozen importlib._bootstrap>", line 971, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 955, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 665, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 674, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 779, in get_code
+  File "<frozen importlib._bootstrap_external>", line 487, in _compile_bytecode
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "./main.py", line 11, in <module>
+    import tensorflow as tf
+  File "/home/bruno/.local/lib/python3.6/site-packages/tensorflow/__init__.py", line 28, in <module>
+    from tensorflow.python import pywrap_tensorflow  # pylint: disable=unused-import
+  File "/home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/__init__.py", line 47, in <module>
+    import numpy as np
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/__init__.py", line 142, in <module>
+    from . import core
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/core/__init__.py", line 82, in <module>
+    from . import defchararray as char
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/core/defchararray.py", line 1513, in <module>
+    def strip(a, chars=None):
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/core/overrides.py", line 181, in decorator
+    source, filename='<__array_function__ internals>', mode='exec')
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "./main.py", line 11, in <module>
+    import tensorflow as tf
+  File "/home/bruno/.local/lib/python3.6/site-packages/tensorflow/__init__.py", line 28, in <module>
+    from tensorflow.python import pywrap_tensorflow  # pylint: disable=unused-import
+  File "/home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/__init__.py", line 47, in <module>
+    import numpy as np
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/__init__.py", line 142, in <module>
+    from . import core
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/core/__init__.py", line 82, in <module>
+    from . import defchararray as char
+  File "<frozen importlib._bootstrap>", line 971, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 955, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 665, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 674, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 779, in get_code
+  File "<frozen importlib._bootstrap_external>", line 487, in _compile_bytecode
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "./main.py", line 11, in <module>
+    import tensorflow as tf
+  File "/home/bruno/.local/lib/python3.6/site-packages/tensorflow/__init__.py", line 28, in <module>
+    from tensorflow.python import pywrap_tensorflow  # pylint: disable=unused-import
+  File "/home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/__init__.py", line 47, in <module>
+    import numpy as np
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/__init__.py", line 142, in <module>
+    from . import core
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/core/__init__.py", line 107, in <module>
+    from . import _internal
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/core/_internal.py", line 11, in <module>
+    import platform
+  File "/usr/lib/python3.6/platform.py", line 292, in <module>
+    r'[^(]*(?:\((.+)\))?', re.ASCII)
+  File "/usr/lib/python3.6/re.py", line 233, in compile
+    return _compile(pattern, flags)
+  File "/usr/lib/python3.6/re.py", line 301, in _compile
+    p = sre_compile.compile(pattern, flags)
+  File "/usr/lib/python3.6/sre_compile.py", line 566, in compile
+    code = _code(p, flags)
+  File "/usr/lib/python3.6/sre_compile.py", line 551, in _code
+    _compile(code, p.data, flags)
+  File "/usr/lib/python3.6/sre_compile.py", line 134, in _compile
+    _compile(code, av[2], flags)
+  File "/usr/lib/python3.6/sre_compile.py", line 79, in _compile
+    for op, av in pattern:
+  File "/usr/lib/python3.6/sre_parse.py", line 164, in __getitem__
+    if isinstance(index, slice):
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "./main.py", line 11, in <module>
+    import tensorflow as tf
+  File "/home/bruno/.local/lib/python3.6/site-packages/tensorflow/__init__.py", line 28, in <module>
+    from tensorflow.python import pywrap_tensorflow  # pylint: disable=unused-import
+  File "/home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/__init__.py", line 47, in <module>
+    import numpy as np
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/__init__.py", line 142, in <module>
+    from . import core
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/core/__init__.py", line 82, in <module>
+    from . import defchararray as char
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/core/defchararray.py", line 429, in <module>
+    def center(a, width, fillchar=' '):
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/core/overrides.py", line 181, in decorator
+    source, filename='<__array_function__ internals>', mode='exec')
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "./main.py", line 11, in <module>
+    import tensorflow as tf
+  File "/home/bruno/.local/lib/python3.6/site-packages/tensorflow/__init__.py", line 28, in <module>
+    from tensorflow.python import pywrap_tensorflow  # pylint: disable=unused-import
+  File "/home/bruno/.local/lib/python3.6/site-packages/tensorflow/python/__init__.py", line 47, in <module>
+    import numpy as np
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/__init__.py", line 142, in <module>
+    from . import core
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/core/__init__.py", line 107, in <module>
+    from . import _internal
+  File "/home/bruno/.local/lib/python3.6/site-packages/numpy/core/_internal.py", line 11, in <module>
+    import platform
+  File "/usr/lib/python3.6/platform.py", line 292, in <module>
+    r'[^(]*(?:\((.+)\))?', re.ASCII)
+  File "/usr/lib/python3.6/re.py", line 233, in compile
+    return _compile(pattern, flags)
+  File "/usr/lib/python3.6/re.py", line 301, in _compile
+    p = sre_compile.compile(pattern, flags)
+  File "/usr/lib/python3.6/sre_compile.py", line 562, in compile
+    p = sre_parse.parse(p, flags)
+  File "/usr/lib/python3.6/sre_parse.py", line 855, in parse
+    p = _parse_sub(source, pattern, flags & SRE_FLAG_VERBOSE, 0)
+  File "/usr/lib/python3.6/sre_parse.py", line 416, in _parse_sub
+    not nested and not items))
+  File "/usr/lib/python3.6/sre_parse.py", line 488, in _parse
+    sourceget()
+  File "/usr/lib/python3.6/sre_parse.py", line 255, in get
+    self.__next()
+  File "/usr/lib/python3.6/sre_parse.py", line 239, in __next
+    if char == "\\":
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "./main.py", line 15, in <module>
+    from loadDataSets import leituraMesa, simulado3out, simulado10out, leitura1902, DatasetNdimentional
+  File "/media/bruno/77ddb526-6e16-4226-a528-8116b47018d6/home/bruno/largeDisk/Unicamp/IC/Vibration-analysis/loadDataSets.py", line 3, in <module>
+    import librosa
+  File "/home/bruno/.local/lib/python3.6/site-packages/librosa/__init__.py", line 12, in <module>
+    from . import core
+  File "/home/bruno/.local/lib/python3.6/site-packages/librosa/core/__init__.py", line 123, in <module>
+    from .time_frequency import *  # pylint: disable=wildcard-import
+  File "/home/bruno/.local/lib/python3.6/site-packages/librosa/core/time_frequency.py", line 11, in <module>
+    from ..util.exceptions import ParameterError
+  File "/home/bruno/.local/lib/python3.6/site-packages/librosa/util/__init__.py", line 77, in <module>
+    from .utils import *  # pylint: disable=wildcard-import
+  File "/home/bruno/.local/lib/python3.6/site-packages/librosa/util/utils.py", line 10, in <module>
+    import numba
+  File "/home/bruno/.local/lib/python3.6/site-packages/numba/__init__.py", line 18, in <module>
+    from .special import (
+  File "/home/bruno/.local/lib/python3.6/site-packages/numba/special.py", line 5, in <module>
+    from .typing.typeof import typeof
+  File "/home/bruno/.local/lib/python3.6/site-packages/numba/typing/__init__.py", line 2, in <module>
+    from .context import BaseContext, Context
+  File "/home/bruno/.local/lib/python3.6/site-packages/numba/typing/context.py", line 14, in <module>
+    from .typeof import typeof, Purpose
+  File "/home/bruno/.local/lib/python3.6/site-packages/numba/typing/typeof.py", line 9, in <module>
+    from numba import numpy_support, types, utils
+  File "<frozen importlib._bootstrap>", line 971, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 955, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 665, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 674, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 764, in get_code
+  File "<frozen importlib._bootstrap_external>", line 833, in get_data
+KeyboardInterrupt
