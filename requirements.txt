@@ -2,7 +2,7 @@ absl-py==0.11.0
 astor==0.8.1
 audioread==2.1.9
 cached-property==1.5.2
-certifi==2020.11.8
+certifi==2022.12.7
 cffi==1.14.4
 chardet==3.0.4
 cycler==0.10.0
